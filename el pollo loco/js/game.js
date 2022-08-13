@@ -1,7 +1,5 @@
 let canvas;
 let world;
-let character = new Character();
-let object = new MovableObject();
 
 function init() {
     canvas = document.getElementById('canvas');
