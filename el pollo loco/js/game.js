@@ -7,3 +7,7 @@ function init() {
 
     console.log('My character is', world.character);
 }
+
+document.addEventListener('keypress', (e) => {
+    console.log(e)
+});
