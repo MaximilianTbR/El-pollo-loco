@@ -20,16 +20,6 @@ class World {
         this.checkCollisions();
     }
 
-    checkCollisions() {
-        setInterval(() => {
-            this.enemies.forEach((enemy) => {
-                if (this.character.isColliding(enemy)) {
-                    console.log('Collision with Character', enemy)
-                }
-            })
-        })
-    }
-
     setWorld() {
         this.character.world = this;
     }
@@ -82,5 +72,15 @@ class World {
     flipImageBack(mo) {
         mo.x = mo.x * -1;
         this.ctx.restore();
+    }
+
+    checkCollisions() {
+        setInterval(() => {
+            this.level.enemies.forEach((enemy) => {
+                if (this.character.isColliding(enemy)) {
+                    this.character.hit();
+                }
+            })
+        }, 200)
     }
 }
