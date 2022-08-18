@@ -1,11 +1,4 @@
-class MovableObject {
-    x = 180;
-    y = 280;
-    img;
-    height = 150;
-    width = 100;
-    imageCache = {};
-    currentImage = 0;
+class MovableObject extends DrawableObject {
     speed = 0.15;
     otherDirection = false;
     speedY = 0;
@@ -24,25 +17,6 @@ class MovableObject {
 
     isAboveGround() {
         return this.y < 180;
-    }
-
-    loadImage(path) {
-        this.img = new Image(); // this.img = document.getelementById('img'); <img id="img">
-        this.img.src = path;
-    }
-
-    draw(ctx) {
-        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-    }
-
-    drawFrame(ctx) {
-        if (this instanceof Character || this instanceof Chicken || this instanceof Endboss) {
-            ctx.beginPath();
-            ctx.lineWidth = "1";
-            ctx.strokeStyle = "blue";
-            ctx.rect(this.x, this.y, this.width, this.height);
-            ctx.stroke();
-        }
     }
 
     isColliding(mo) {
@@ -69,19 +43,6 @@ class MovableObject {
         let timepassed = new Date().getTime() - this.lastHit; // difference in ms
         timepassed = timepassed / 1000; // Difference in s
         return timepassed < 5;
-    }
-
-    /**
-     * 
-     * @param {Array} arr - ['img/image1.png', 'img/image2.png', ...];
-     */
-
-    loadImages(arr) {
-        arr.forEach((path) => {
-            let img = new Image();
-            img.src = path;
-            this.imageCache[path] = img;
-        })
     }
 
     moveRight() {

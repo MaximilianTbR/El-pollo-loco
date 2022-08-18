@@ -20,8 +20,7 @@ class Character extends MovableObject {
         'img/2_character_pepe/3_jump/J-36.png',
         'img/2_character_pepe/3_jump/J-37.png',
         'img/2_character_pepe/3_jump/J-38.png',
-        'img/2_character_pepe/3_jump/J-39.png',
-        'img/2_character_pepe/3_jump/J-40.png'
+        'img/2_character_pepe/3_jump/J-39.png'
     ];
 
     IMAGES_DEAD = [
