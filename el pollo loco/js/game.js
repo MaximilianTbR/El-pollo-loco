@@ -5,8 +5,16 @@ let keyboard = new Keyboard();
 function init() {
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
+}
 
-    console.log('My character is', world.character);
+function startGame() {
+    document.getElementById('end-screen').classList.add('d-none');
+    document.getElementById('start-screen').classList.add('d-none');
+    document.getElementById('canvas').classList.add('start-screen-shadow');
+    document.getElementById('btn').classList.add('d-none');
+    document.getElementById('canvas').classList.remove('canvas-1');
+    document.getElementById('canvas').classList.add('canvas-2');
+    setTimeout(init(), 3000)
 }
 
 document.addEventListener('keydown', (e) => {
@@ -25,6 +33,9 @@ document.addEventListener('keydown', (e) => {
     if (e.keyCode == 32) {
         keyboard.SPACE = true;
     }
+    if (e.keyCode == 68) {
+        keyboard.D = true;
+    }
 });
 
 document.addEventListener('keyup', (e) => {
@@ -42,5 +53,8 @@ document.addEventListener('keyup', (e) => {
     }
     if (e.keyCode == 32) {
         keyboard.SPACE = false;
+    }
+    if (e.keyCode == 68) {
+        keyboard.D = false;
     }
 });

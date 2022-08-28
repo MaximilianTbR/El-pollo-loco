@@ -5,30 +5,71 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="img/5_background/sombrero.png">
     <link rel="stylesheet" href="style.css">
     <script src="classes/drawable-object.class.js"></script>
     <script src="classes/movable-object.class.js"></script>
+    <script src="classes/throwable-object.class.js"></script>
+    <script src="classes/collectable-object.class.js"></script>
     <script src="classes/character.class.js"></script>
     <script src="classes/chicken.class.js"></script>
+    <script src="classes/endboss.class.js"></script>
     <script src="classes/cloud.class.js"></script>
-    <script src="classes/status-bar.class.js"></script>
     <script src="classes/money-bar.class.js"></script>
+    <script src="classes/status-bar.class.js"></script>
     <script src="classes/bottle-bar.class.js"></script>
     <script src="classes/world.class.js"></script>
     <script src="classes/world.class.js"></script>
     <script src="classes/background-object.class.js"></script>
     <script src="classes/keyboard.class.js"></script>
-    <script src="classes/endboss.class.js"></script>
     <script src="classes/level.class.js"></script>
     <script src="levels/level1.js"></script>
     <script src="js/game.js"></script>
 </head>
 
-<body onload="init()">
-
-    <h1>El pollo loco</h1>
-
-    <canvas id="canvas" width="720" height="480"></canvas>
+<body onload="">
+    <div class="whole-body">
+        <img src="img/5_background/background_behind_canvas_2.jpg" class="bg-img">
+        <div class="whole-body-upper-content">
+            <h1 class="header">El Pollo Loco</h1>
+            <img src="img/5_background/startscreen.png" id="start-screen" class="startscreen-img">
+            <img src="img/5_background/game-over-screen.png" class="end-screen d-none" id="end-screen">
+            <button class="btn" onclick="startGame()" id="btn">Start Game</button>
+            <canvas id="canvas" height="480" width="720" class="canvas-1"></canvas>
+            <div class="all-info-keys">
+                <div class="single-info-key">
+                    <img src="img/5_background/paper-bg-2.png" class="single-key-img-bg">
+                    <img src="img/5_background/left-key.png" class="single-key-img">
+                    <span class="single-info-key-span">Left</span>
+                </div class="all-info-keys">
+                <div class="single-info-key">
+                    <img src="img/5_background/paper-bg-2.png" class="single-key-img-bg">
+                    <img src="img/5_background/up-key.png" class="single-key-img">
+                    <span class="single-info-key-span">Jump</span>
+                </div>
+                <div class="single-info-key">
+                    <img src="img/5_background/paper-bg-2.png" class="single-key-img-bg">
+                    <img src="img/5_background/right-key.png" class="single-key-img">
+                    <span class="single-info-key-span">Right</span>
+                </div>
+                <div class="single-info-key">
+                    <img src="img/5_background/paper-bg-2.png" class="single-key-img-bg">
+                    <img src="img/5_background/key-f2.png" class="single-key-img">
+                    <span class="single-info-key-span two-lines">Full-<br>screen</span>
+                </div>
+                <div class="single-info-key">
+                    <img src="img/5_background/paper-bg-2.png" class="single-key-img-bg">
+                    <img src="img/5_background/key-d.png" class="single-key-img">
+                    <span class="single-info-key-span">Throw</span>
+                </div>
+                <div class="single-info-key">
+                    <img src="img/5_background/paper-bg-2.png" class="single-key-img-bg">
+                    <img src="img/5_background/key-r.png" class="single-key-img">
+                    <span class="single-info-key-span">Reload</span>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
