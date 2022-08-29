@@ -3,7 +3,7 @@ class Character extends MovableObject {
     y = 80;
     height = 250;
     speed = 10;
-    dnone = 'display: none';
+
     IMAGES_WALKING = [
         'img/2_character_pepe/2_walk/W-21.png',
         'img/2_character_pepe/2_walk/W-22.png',
@@ -81,11 +81,17 @@ class Character extends MovableObject {
 
         //Walk animation 
         setInterval(() => {
-            if (this.isDead()) {
+            if (this.isDead) {
+                const myInterval = setInterval(() => {
+                    console.log('it works');
+                    document.getElementById('end-screen').classList.remove('d-none');
+                    document.getElementById('btn').classList.remove('d-none');
+                }, 100);
+                setTimeout(clearInterval(myInterval), 200);
                 this.playAnimation(this.IMAGES_DEAD);
                 console.log('Collision with character, energy', this.character.energy);
-                setTimeout(this.characterDisappears, 3000);
-            } else if (this.isHurt()) {
+            }
+            if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
             } else if (this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMPING);
@@ -94,17 +100,6 @@ class Character extends MovableObject {
                     this.playAnimation(this.IMAGES_WALKING);
                 }
             }
-        }, 100)
-
-        if (this.isDead()) {
-            document.getElementById('end-screen').classList.remove('d-none');
-            document.getElementById('btn').classList.remove('d-none');
-            document.getElementById('canvas').classList.add('end-screen-shadow');
-        }
+        }, 100);
     }
-
-    characterDisappears() {
-        Character.style = 'display: none';
-    }
-
 }
