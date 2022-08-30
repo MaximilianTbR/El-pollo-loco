@@ -14,6 +14,10 @@ class World {
     statusBar = new StatusBar();
     bottleBar = new BottleBar();
     throwableObjects = [];
+    defeat = false;
+    win = false;
+    youAreDefeated = new Defeat();
+    youWin = new Win;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -53,6 +57,12 @@ class World {
         requestAnimationFrame(function() {
             self.draw();
         });
+
+        if (this.defeat) {
+            this.addToMap(this.youAreDefeated);
+        } else if (this.win) {
+            this.addToMap(this.youWin);
+        }
     }
 
     addObjectsToMap(objects) {

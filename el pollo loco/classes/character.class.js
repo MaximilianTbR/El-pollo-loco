@@ -3,6 +3,7 @@ class Character extends MovableObject {
     y = 80;
     height = 250;
     speed = 10;
+    defeat = this.defeat;
 
     IMAGES_WALKING = [
         'img/2_character_pepe/2_walk/W-21.png',
@@ -42,7 +43,8 @@ class Character extends MovableObject {
 
     world;
     walking_sound = new Audio('audio/running.mp3');
-    walking_sound = new Audio('audio/running.mp3');
+    jumping_sound = new Audio('audio/jump.mp3');
+
     character = 0;
 
     constructor() {
@@ -72,6 +74,7 @@ class Character extends MovableObject {
             }
             if (this.world.keyboard.UP && !this.isAboveGround() || this.world.keyboard.SPACE && !this.isAboveGround()) {
                 this.jump();
+                this.jumping_sound.play();
             }
             if (this.world.keyboard.D) {
                 console.log('bottle is thrown again')
@@ -82,14 +85,9 @@ class Character extends MovableObject {
         //Walk animation 
         setInterval(() => {
             if (this.isDead) {
-                const myInterval = setInterval(() => {
-                    console.log('it works');
-                    document.getElementById('end-screen').classList.remove('d-none');
-                    document.getElementById('btn').classList.remove('d-none');
-                }, 100);
-                setTimeout(clearInterval(myInterval), 200);
                 this.playAnimation(this.IMAGES_DEAD);
                 console.log('Collision with character, energy', this.character.energy);
+                defeat = true;
             }
             if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);

@@ -5,6 +5,7 @@ let keyboard = new Keyboard();
 function init() {
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
+    initLevel();
 }
 
 function startGame() {
@@ -57,3 +58,26 @@ document.addEventListener('keyup', (e) => {
         keyboard.D = false;
     }
 });
+
+function openFullscreen() {
+    let fullscreen = document.getElementById('canvas');
+    enterFullscreen(fullscreen);
+}
+
+function enterFullscreen(element) {
+    if (element.requestFullscreen) {
+        element.requestFullscreen();
+    } else if (element.msRequestFullscreen) {
+        element.msRequestFullscreen();
+    } else if (element.webkitRequestFullscreen) {
+        element.webkitRequestFullscreen();
+    }
+}
+
+function exitFullscreen(element) {
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.webKitExitFullscreen) {
+        document.webKitExitFullscreen();
+    }
+}
