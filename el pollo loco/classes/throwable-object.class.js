@@ -1,4 +1,5 @@
 class ThrowableObject extends MovableObject {
+
     IMAGES_ON_GROUND = [
         'img/6_salsa_bottle/1_salsa_bottle_on_ground.png',
         'img/6_salsa_bottle/2_salsa_bottle_on_ground.png'
@@ -30,10 +31,15 @@ class ThrowableObject extends MovableObject {
         this.y = y;
         this.height = 60;
         this.width = 50;
-        this.throw(100, 150);
+        this.throw(x, y);
     }
 
     throw (x, y) {
+        character = this.character;
+        otherDirection = this.otherDirection;
+        if (this.character.otherDirection == true) {
+            console.log('it works')
+        }
         this.x = x;
         this.y = y;
         this.speedY = 25;
@@ -42,6 +48,4 @@ class ThrowableObject extends MovableObject {
             this.x += 10;
         }, 25)
     }
-
-
 }

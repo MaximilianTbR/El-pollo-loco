@@ -1,11 +1,13 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+let backgroundMusic = new Audio('audio/background-music.mp3');
 
 function init() {
+    initLevel();
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
-    initLevel();
+    backgroundMusic.play();
 }
 
 function startGame() {

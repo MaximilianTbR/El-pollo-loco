@@ -4,8 +4,8 @@ class World {
     level = level1;
     enemies = level1.enemies;
     clouds = level1.clouds;
-    endboss = level1.endboss;
     backgroundObjects = level1.backgroundObjects;
+    endboss = level1.endboss;
     canvas;
     ctx;
     keyboard;
@@ -13,11 +13,8 @@ class World {
     moneyBar = new MoneyBar();
     statusBar = new StatusBar();
     bottleBar = new BottleBar();
+    collectableObjectsMoney = [];
     throwableObjects = [];
-    defeat = false;
-    win = false;
-    youAreDefeated = new Defeat();
-    youWin = new Win;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -49,7 +46,7 @@ class World {
 
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
-
+        this.addObjectsToMap(this.endboss);
         this.ctx.translate(-this.camera_x, 0);
 
         // draw() will be executed over and over again
@@ -76,7 +73,6 @@ class World {
             this.flipImage(mo);
         }
 
-        mo.draw(this.ctx);
         mo.draw(this.ctx);
 
         if (mo.otherDirection) {

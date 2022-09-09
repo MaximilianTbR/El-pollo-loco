@@ -3,7 +3,6 @@ class Character extends MovableObject {
     y = 80;
     height = 250;
     speed = 10;
-    defeat = this.defeat;
 
     IMAGES_WALKING = [
         'img/2_character_pepe/2_walk/W-21.png',
@@ -26,13 +25,7 @@ class Character extends MovableObject {
     ];
 
     IMAGES_DEAD = [
-        'img/2_character_pepe/5_dead/D-51.png',
         'img/2_character_pepe/5_dead/D-52.png',
-        'img/2_character_pepe/5_dead/D-53.png',
-        'img/2_character_pepe/5_dead/D-54.png',
-        'img/2_character_pepe/5_dead/D-55.png',
-        'img/2_character_pepe/5_dead/D-56.png',
-        'img/2_character_pepe/5_dead/D-57.png'
     ];
 
     IMAGES_HURT = [
@@ -44,6 +37,7 @@ class Character extends MovableObject {
     world;
     walking_sound = new Audio('audio/running.mp3');
     jumping_sound = new Audio('audio/jump.mp3');
+    throwing_sound = new Audio('audio/throwing.mp3');
 
     character = 0;
 
@@ -77,17 +71,16 @@ class Character extends MovableObject {
                 this.jumping_sound.play();
             }
             if (this.world.keyboard.D) {
-                console.log('bottle is thrown again')
+                this.throwing_sound.play();
             }
             this.world.camera_x = -this.x + 100;
         }, 1000 / 60)
 
         //Walk animation 
         setInterval(() => {
-            if (this.isDead) {
+            if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
                 console.log('Collision with character, energy', this.character.energy);
-                defeat = true;
             }
             if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
