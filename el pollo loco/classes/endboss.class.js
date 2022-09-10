@@ -3,6 +3,8 @@ class Endboss extends MovableObject {
     height = 400;
     width = 250;
     y = 60;
+
+
     IMAGES_SPAWNING = [
         'img/4_enemie_boss_chicken/2_alert/G5.png',
         'img/4_enemie_boss_chicken/2_alert/G6.png',
@@ -32,6 +34,7 @@ class Endboss extends MovableObject {
     }
 
     animate() {
+        console.log(this.world.character.x);
         let i = 0;
         setInterval(() => {
             if (i < 10) {
@@ -41,7 +44,7 @@ class Endboss extends MovableObject {
             }
             i++;
 
-            if (world.character.x > 1500 && !this.hadFirstContact) { // WICHTIG: du musst noch an x-koordinate von character (world.character.x) erstmal rankommen, bedeutet, du musst diese Variable irgendwie von world-Klasse in diese Klasse hier bekommen (in Slack nachfragen)
+            if (this.world.character.x > 1500 && !this.hadFirstContact) { // WICHTIG: du musst noch an x-koordinate von character (world.character.x) erstmal rankommen, bedeutet, du musst diese Variable irgendwie von world-Klasse in diese Klasse hier bekommen (in Slack nachfragen)
                 i = 0;
                 this.hadFirstContact = true;
             }

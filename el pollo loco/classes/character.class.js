@@ -1,8 +1,10 @@
 class Character extends MovableObject {
 
+    x;
     y = 80;
     height = 250;
     speed = 10;
+    bottle = 10;
 
     IMAGES_WALKING = [
         'img/2_character_pepe/2_walk/W-21.png',
@@ -47,6 +49,7 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_JUMPING);
         this.loadImages(this.IMAGES_DEAD);
         this.loadImages(this.IMAGES_HURT);
+        console.log(this.x)
         this.applyGravity();
         this.animate();
     }
@@ -63,6 +66,7 @@ class Character extends MovableObject {
             }
             if (this.world.keyboard.LEFT && this.x > 0) {
                 this.otherDirection = true;
+                console.log(this.otherDirection);
                 this.moveLeft();
                 this.walking_sound.play();
             }

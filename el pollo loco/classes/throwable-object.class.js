@@ -35,17 +35,19 @@ class ThrowableObject extends MovableObject {
     }
 
     throw (x, y) {
-        character = this.character;
-        otherDirection = this.otherDirection;
-        if (this.character.otherDirection == true) {
-            console.log('it works')
-        }
         this.x = x;
         this.y = y;
         this.speedY = 25;
         this.applyGravity();
-        setInterval(() => {
-            this.x += 10;
-        }, 25)
+        if (world.character.otherDirection) {
+            setInterval(() => {
+                this.x -= 10;
+            }, 25)
+        } else if (!world.character.otherdirection) {
+            setInterval(() => {
+                this.x += 10;
+            }, 25)
+        }
+
     }
 }

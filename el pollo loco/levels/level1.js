@@ -6,9 +6,9 @@ function initLevel() {
             new Chicken(),
             new Chicken(),
             new Chicken(),
-            new smallChicken(),
-            new smallChicken(),
-            new smallChicken()
+            //new smallChicken(),
+            //new smallChicken(),
+            //new smallChicken()
         ], [
             new Cloud()
         ], [
@@ -38,6 +38,8 @@ function initLevel() {
             new BackgroundObject('img/5_background/layers/1_first_layer/1.png', 719 * 3)
         ], [
             new Endboss()
+        ], [
+            new Bottle()
         ]
     );
 }
