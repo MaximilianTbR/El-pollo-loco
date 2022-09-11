@@ -1,7 +1,8 @@
-class Coin {
-    y = 360;
-    width = 80;
-    height = 60;
+class Coin extends DrawableObject {
+
+    y = 310;
+    width = 160;
+    height = 160;
 
     IMAGES_COLLECTABLE = [
         'img/8_coin/coin_1.png',
@@ -9,14 +10,8 @@ class Coin {
     ];
 
     constructor() {
+        super().loadImage('img/8_coin/coin_1.png');
         this.loadImages(this.IMAGES_COLLECTABLE);
-        this.x = 200 + Math.random() * 2000; // number between 200 and 500
-        this.animate();
-    }
-
-    animate() {
-        setInterval(() => {
-            this.playAnimation(this.IMAGES_COLLECTABLE);
-        }, 200)
+        this.x = 200 + Math.random() * 2000; // number between 200 and 2000
     }
 }

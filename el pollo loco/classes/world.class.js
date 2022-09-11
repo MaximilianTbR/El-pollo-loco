@@ -6,6 +6,7 @@ class World {
     clouds = level1.clouds;
     backgroundObjects = level1.backgroundObjects;
     endboss = level1.endboss;
+    collectableObjects = level1.collectableObjects;
     canvas;
     ctx;
     keyboard;
@@ -47,6 +48,7 @@ class World {
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.endboss);
+        this.addObjectsToMap(this.level.collectableObjects);
         this.ctx.translate(-this.camera_x, 0);
 
         // draw() will be executed over and over again
