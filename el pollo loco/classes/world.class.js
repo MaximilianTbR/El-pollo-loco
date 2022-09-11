@@ -125,8 +125,8 @@ class World {
     checkCollectingBottles() {
         this.level.collectableBottles.forEach((collectableObject) => {
             if (this.character.isColliding(collectableObject)) {
-                this.character.collectedBottles + 1;
-                this.bottleBar.setPercentage(this.collectedBottles);
+                this.character.collectedBottles += 1;
+                this.bottleBar.setPercentage(this.character.collectedBottles);
                 let index = this.level.collectableBottles.indexOf(collectableObject);
                 this.level.collectableBottles.splice(index, 1);
             }
@@ -136,9 +136,8 @@ class World {
     checkCollectingCoins() {
         this.level.collectableCoins.forEach((collectableObject) => {
             if (this.character.isColliding(collectableObject)) {
-                this.collectedBottles + 1;
-                this.bottleBar.setPercentage(this.collectedBottles);
-                console.log(this.collectedBottles);
+                this.character.collectedCoins += 1;
+                this.moneyBar.setPercentage(this.character.collectedCoins);
                 let index = this.level.collectableCoins.indexOf(collectableObject);
                 this.level.collectableCoins.splice(index, 1);
             }
@@ -146,9 +145,10 @@ class World {
     }
 
     checkThrowObjects() {
-        if (this.keyboard.D && this.character.bottle > 0) {
+        if (this.keyboard.D && this.character.collectedBottles > 0) {
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100)
             this.throwableObjects.push(bottle);
+            this.character.collectedBottles -= 1;
             this.bottleBar.setPercentage(this.character.bottle);
         }
     }

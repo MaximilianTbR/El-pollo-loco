@@ -4,7 +4,6 @@ class Character extends MovableObject {
     y = 80;
     height = 250;
     speed = 10;
-    bottle = 10;
 
     IMAGES_WALKING = [
         'img/2_character_pepe/2_walk/W-21.png',
@@ -43,6 +42,7 @@ class Character extends MovableObject {
 
     character = 0;
     collectedBottles = 0;
+    collectedCoins = 0;
 
     constructor() {
         super().loadImage('./img/2_character_pepe/2_walk/W-21.png')

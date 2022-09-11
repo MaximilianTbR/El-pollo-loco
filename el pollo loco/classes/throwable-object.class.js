@@ -37,6 +37,7 @@ class ThrowableObject extends MovableObject {
     throw (x, y) {
         this.x = x;
         this.y = y;
+        console.log(this.y);
         this.speedY = 25;
         this.applyGravity();
         if (world.character.otherDirection) {
