@@ -18,6 +18,7 @@ class World {
     bottleBar = new BottleBar();
     collectableObjectsMoney = [];
     throwableObjects = [];
+    bottle;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');

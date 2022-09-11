@@ -27,6 +27,8 @@ class ThrowableObject extends MovableObject {
 
     constructor(x, y) {
         super().loadImage('img/6_salsa_bottle/1_salsa_bottle_on_ground.png');
+        this.loadImages(this.IMAGES_ROTATION);
+        this.loadImages(this.IMAGES_SPLASH);
         this.x = x;
         this.y = y;
         this.height = 60;
@@ -37,16 +39,22 @@ class ThrowableObject extends MovableObject {
     throw (x, y) {
         this.x = x;
         this.y = y;
-        console.log(this.y);
+        //setInterval(() => {}, 25)
         this.speedY = 25;
         this.applyGravity();
         if (world.character.otherDirection) {
             setInterval(() => {
                 this.x -= 10;
+                console.log(this.y);
             }, 25)
         } else if (!world.character.otherdirection) {
             setInterval(() => {
                 this.x += 10;
+                console.log(this.y);
+                if (this.y == 350) {
+                    this.y = 350;
+                    this.playAnimation(this.IMAGES_SPLASH);
+                }
             }, 25)
         }
 
