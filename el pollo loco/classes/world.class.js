@@ -6,7 +6,8 @@ class World {
     clouds = level1.clouds;
     backgroundObjects = level1.backgroundObjects;
     endboss = level1.endboss;
-    collectableObjects = level1.collectableObjects;
+    collectableBottles = level1.collectableBottles;
+    collectableCoins = level1.collectableCoins;
     canvas;
     ctx;
     keyboard;
@@ -48,7 +49,8 @@ class World {
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.endboss);
-        this.addObjectsToMap(this.level.collectableObjects);
+        this.addObjectsToMap(this.level.collectableBottles);
+        this.addObjectsToMap(this.level.collectableCoins);
         this.ctx.translate(-this.camera_x, 0);
 
         // draw() will be executed over and over again
@@ -97,6 +99,8 @@ class World {
     run() { // function, that contains essential functions for the game which runs nearly the whole time
         setInterval(() => {
             this.checkCollisions();
+            this.checkCollectingBottles();
+            this.checkCollectingCoins();
             this.checkThrowObjects();
         }, 200)
     }
@@ -106,6 +110,36 @@ class World {
             if (this.character.isColliding(enemy)) {
                 this.character.hit();
                 this.statusBar.setPercentage(this.character.energy);
+            }
+        })
+
+        this.level.endboss.forEach((endboss) => {
+            if (this.character.isColliding(endboss)) {
+                this.character.hit();
+                this.statusBar.setPercentage(this.character.energy);
+            }
+        });
+    }
+
+    checkCollectingBottles() {
+        this.level.collectableBottles.forEach((collectableObject) => {
+            if (this.character.isColliding(collectableObject)) {
+                this.character.collectedBottles + 1;
+                this.bottleBar.setPercentage(this.character.collectedBottles);
+                let index = this.level.collectableBottles.indexOf(collectableObject);
+                this.level.collectableBottles.splice(index, 1);
+            }
+        })
+    }
+
+    checkCollectingCoins() {
+        this.level.collectableCoins.forEach((collectableObject) => {
+            if (this.character.isColliding(collectableObject)) {
+                this.character.collectedBottles + 1;
+                this.bottleBar.setPercentage(this.character.collectedBottles);
+                console.log(this.character.collectedBottles);
+                let index = this.level.collectableCoins.indexOf(collectableObject);
+                this.level.collectableCoins.splice(index, 1);
             }
         })
     }

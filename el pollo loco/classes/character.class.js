@@ -42,6 +42,7 @@ class Character extends MovableObject {
     throwing_sound = new Audio('audio/throwing.mp3');
 
     character = 0;
+    collectedBottles = 0;
 
     constructor() {
         super().loadImage('./img/2_character_pepe/2_walk/W-21.png')
