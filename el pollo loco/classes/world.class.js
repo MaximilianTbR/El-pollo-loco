@@ -8,6 +8,7 @@ class World {
     endboss = level1.endboss;
     collectableBottles = level1.collectableBottles;
     collectableCoins = level1.collectableCoins;
+    collectedBottles = 0;
     canvas;
     ctx;
     keyboard;
@@ -125,7 +126,7 @@ class World {
         this.level.collectableBottles.forEach((collectableObject) => {
             if (this.character.isColliding(collectableObject)) {
                 this.character.collectedBottles + 1;
-                this.bottleBar.setPercentage(this.character.collectedBottles);
+                this.bottleBar.setPercentage(this.collectedBottles);
                 let index = this.level.collectableBottles.indexOf(collectableObject);
                 this.level.collectableBottles.splice(index, 1);
             }
@@ -135,9 +136,9 @@ class World {
     checkCollectingCoins() {
         this.level.collectableCoins.forEach((collectableObject) => {
             if (this.character.isColliding(collectableObject)) {
-                this.character.collectedBottles + 1;
-                this.bottleBar.setPercentage(this.character.collectedBottles);
-                console.log(this.character.collectedBottles);
+                this.collectedBottles + 1;
+                this.bottleBar.setPercentage(this.collectedBottles);
+                console.log(this.collectedBottles);
                 let index = this.level.collectableCoins.indexOf(collectableObject);
                 this.level.collectableCoins.splice(index, 1);
             }
