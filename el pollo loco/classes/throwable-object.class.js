@@ -45,16 +45,15 @@ class ThrowableObject extends MovableObject {
         if (world.character.otherDirection) {
             setInterval(() => {
                 this.x -= 10;
-                console.log(this.y);
             }, 25)
         } else if (!world.character.otherdirection) {
-            setInterval(() => {
+            let myInterval = setInterval(() => {
                 this.x += 10;
-                console.log(this.y);
-                if (this.y == 350) {
+                /*if (this.y == 350) {
                     this.y = 350;
                     this.playAnimation(this.IMAGES_SPLASH);
-                }
+                }*/
+                this.isOnGround();
             }, 25)
         }
 
