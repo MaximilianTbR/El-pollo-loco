@@ -21,8 +21,7 @@ class ThrowableObject extends MovableObject {
         'img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png',
     ];
 
-    speedY = 30;
-    speedX = 20;
+    groundPosition = 350;
 
 
     constructor(x, y) {
@@ -33,37 +32,34 @@ class ThrowableObject extends MovableObject {
         this.y = y;
         this.height = 60;
         this.width = 50;
+        this.speedY = 25;
+        this.speed = 10;
         this.throw(x, y);
     }
 
-    throw (x, y) {
-        this.x = x;
-        this.y = y;
-        //setInterval(() => {}, 25)
-        this.speedY = 25;
+    throw () {
         this.applyGravity();
+        this.moveObject();
+        this.playObject();
+    }
+
+    moveObject() {
         if (world.character.otherDirection) {
             setInterval(() => {
-                this.x -= 10;
+                this.moveLeft();
             }, 25)
-        } else if (!world.character.otherdirection) {
-            let myInterval = setInterval(() => {
-                this.x += 10;
-                /*if (this.y == 350) {
-                    this.y = 350;
-                    this.playAnimation(this.IMAGES_SPLASH);
-                }*/
-                if (this.y == 350) {
-                    clearInterval(this.myInterval);
-                    this.x += 0;
-                    this.y = 350;
-                    this.speedX = 0;
-                    this.speedY = 0;
-                    this.playAnimation(this.IMAGES_SPLASH);
-                }
-                this.isOnGround(myInterval);
-            }, 25)
+        } else {
+            setInterval(() => this.moveRight(), 25);
         }
+    }
 
+    playObject() {
+        if (this.isAboveGround()) {
+            this.playAnimation(this.IMAGES_ROTATION);
+            console.log('it works');
+        } else if (this.y == 292.5) {
+            console.log('splash!')
+            this.playAnimation(this.IMAGES_SPLASH);
+        }
     }
 }

@@ -6,6 +6,7 @@ class MovableObject extends DrawableObject {
     energy = 100;
     lastHit = 0;
     hadFirstContact = false;
+    groundPosition = 180;
 
     applyGravity() {
         setInterval(() => {
@@ -17,19 +18,7 @@ class MovableObject extends DrawableObject {
     }
 
     isAboveGround() {
-        if (this instanceof ThrowableObject) { // if that is true, ThrowableObject should always fall
-            return true;
-        } else {
-            return this.y < 180;
-        }
-    }
-
-    isOnGround(myInterval) {
-        if (this instanceof ThrowableObject && this.y == 350) {
-            clearInterval(myInterval);
-            this.playAnimation(this.IMAGES_SPLASH);
-
-        }
+        return this.y < this.groundPosition;
     }
 
     isColliding(mo) {
