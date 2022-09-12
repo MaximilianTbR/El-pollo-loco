@@ -53,7 +53,7 @@ class ThrowableObject extends MovableObject {
                     this.y = 350;
                     this.playAnimation(this.IMAGES_SPLASH);
                 }*/
-                this.isOnGround();
+                this.isOnGround(myInterval);
             }, 25)
         }
 

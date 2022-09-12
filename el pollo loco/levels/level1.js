@@ -6,9 +6,9 @@ function initLevel() {
             new Chicken(),
             new Chicken(),
             new Chicken(),
-            //new smallChicken(),
-            //new smallChicken(),
-            //new smallChicken()
+            new smallChicken(),
+            new smallChicken(),
+            new smallChicken()
         ], [
             new Cloud()
         ], [

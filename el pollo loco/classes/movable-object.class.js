@@ -24,10 +24,11 @@ class MovableObject extends DrawableObject {
         }
     }
 
-    isOnGround() {
+    isOnGround(myInterval) {
         if (this instanceof ThrowableObject && this.y == 350) {
             clearInterval(this.myInterval);
             this.x += 0;
+            this.y += 0;
             this.speedX = 0;
             this.speedY = 0;
             this.playAnimation(this.IMAGES_SPLASH);
