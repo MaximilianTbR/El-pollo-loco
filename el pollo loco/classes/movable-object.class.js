@@ -26,12 +26,9 @@ class MovableObject extends DrawableObject {
 
     isOnGround(myInterval) {
         if (this instanceof ThrowableObject && this.y == 350) {
-            clearInterval(this.myInterval);
-            this.x += 0;
-            this.y += 0;
-            this.speedX = 0;
-            this.speedY = 0;
+            clearInterval(myInterval);
             this.playAnimation(this.IMAGES_SPLASH);
+
         }
     }
 
@@ -39,6 +36,13 @@ class MovableObject extends DrawableObject {
         return this.x + this.width > mo.x &&
             this.y + this.height > mo.y &&
             this.x < mo.x + mo.width &&
+            this.y < mo.y + mo.height;
+    }
+
+    isJumpingOn(mo) {
+        return this.x + this.width > mo.x &&
+            this.y + this.height > mo.y &&
+            //this.x < mo.x + mo.width &&
             this.y < mo.y + mo.height;
     }
 
