@@ -19,6 +19,7 @@ class MovableObject extends DrawableObject {
 
     isAboveGround() {
         return this.y < this.groundPosition;
+        console.log(level1.thrownObjects);
     }
 
     isColliding(mo) {
@@ -29,8 +30,8 @@ class MovableObject extends DrawableObject {
     }
 
     isJumpingOn(mo) {
-        return this.x + this.width > mo.x &&
-            this.y + this.height > mo.y &&
+        //this.x + this.width > mo.x &&
+        return this.y + this.height > mo.y &&
             //this.x < mo.x + mo.width &&
             this.y < mo.y + mo.height;
     }

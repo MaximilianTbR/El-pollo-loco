@@ -8,6 +8,7 @@ class World {
     endboss = level1.endboss;
     collectableBottles = level1.collectableBottles;
     collectableCoins = level1.collectableCoins;
+    thrownObjects = level1.thrownObjects;
     collectedBottles = 0;
     canvas;
     ctx;
@@ -121,6 +122,16 @@ class World {
                 this.statusBar.setPercentage(this.character.energy);
             }
         });
+
+        this.level.enemies.forEach((enemy) => {
+            if (this.character.isJumpingOn(enemy)) {
+                console.log("jumped on!")
+            }
+        })
+    }
+
+    checkCollisionWithBottles() {
+
     }
 
     checkCollectingBottles() {

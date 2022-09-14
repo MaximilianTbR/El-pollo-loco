@@ -38,9 +38,14 @@ class ThrowableObject extends MovableObject {
     }
 
     throw () {
+        this.pushIntoArray();
         this.applyGravity();
         this.moveObject();
         this.playObject();
+    }
+
+    pushIntoArray() {
+        this.level1.thrownObjects.push(this instanceof ThrowableObject);
     }
 
     moveObject() {
@@ -49,17 +54,23 @@ class ThrowableObject extends MovableObject {
                 this.moveLeft();
             }, 25)
         } else {
-            setInterval(() => this.moveRight(), 25);
+            setInterval(() => this.moveRightBottle(), 25);
         }
     }
 
+    moveRightBottle() {
+        this.x += this.speed;
+    }
+
     playObject() {
-        if (this.isAboveGround()) {
-            this.playAnimation(this.IMAGES_ROTATION);
-            console.log('it works');
-        } else if (this.y == 292.5) {
-            console.log('splash!')
-            this.playAnimation(this.IMAGES_SPLASH);
-        }
+        let myInterval = setInterval(() => {
+            if (this.isAboveGround()) {
+                this.playAnimation(this.IMAGES_ROTATION);
+            } else if (this.y == 350) {
+                console.log('splash!');
+                this.playAnimation(this.IMAGES_SPLASH);
+
+            }
+        }, 25)
     }
 }
