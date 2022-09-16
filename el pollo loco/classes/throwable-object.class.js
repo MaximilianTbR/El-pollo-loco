@@ -38,7 +38,7 @@ class ThrowableObject extends MovableObject {
     }
 
     throw () {
-        this.pushIntoArray();
+        //this.pushIntoArray();
         this.applyGravity();
         this.moveObject();
         this.playObject();

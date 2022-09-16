@@ -29,13 +29,6 @@ class MovableObject extends DrawableObject {
             this.y < mo.y + mo.height;
     }
 
-    isJumpingOn(mo) {
-        //this.x + this.width > mo.x &&
-        return this.y + this.height > mo.y &&
-            //this.x < mo.x + mo.width &&
-            this.y < mo.y + mo.height;
-    }
-
     hit() {
         this.energy -= 5;
         if (this.energy < 0) {

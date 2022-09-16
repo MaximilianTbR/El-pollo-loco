@@ -124,14 +124,18 @@ class World {
         });
 
         this.level.enemies.forEach((enemy) => {
-            if (this.character.isJumpingOn(enemy)) {
-                console.log("jumped on!")
+            if (this.character.isColliding(enemy) && this.character.isAboveGround()) {
+                let index = this.level.enemies.indexOf(enemy);
+                this.enemies[index].playAnimationBot();
+                this.level.enemies.splice(enemy, 1);
             }
-        })
+        });
     }
 
     checkCollisionWithBottles() {
-
+        if (this instanceof throwableObject().isColliding(enemy)) {
+            console.log('bottled hitted!');
+        }
     }
 
     checkCollectingBottles() {

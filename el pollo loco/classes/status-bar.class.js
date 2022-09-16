@@ -1,5 +1,7 @@
 class StatusBar extends DrawableObject {
 
+    imgalready_loaded = false;
+
     IMAGES = [
         'img/7_statusbars/1_statusbar/2_statusbar_health/orange/0.png', // 1
         'img/7_statusbars/1_statusbar/2_statusbar_health/orange/20.png',
@@ -12,12 +14,17 @@ class StatusBar extends DrawableObject {
 
     constructor() {
         super();
-        this.loadImages(this.IMAGES);
-        this.x = 30;
-        this.y = 0;
-        this.width = 200;
-        this.height = 60;
-        this.setPercentage(100);
+        if (this.imgalready_loaded == false) {
+            this.loadImages(this.IMAGES);
+            this.x = 30;
+            this.y = 0;
+            this.width = 200;
+            this.height = 60;
+            this.setPercentage(100);
+            this.imgalready_loaded == true;
+        } else if (this.imgalready_loaded == true) {
+            console.log('everything done!')
+        }
     }
 
     // setPercentage(100)
