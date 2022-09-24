@@ -88,8 +88,8 @@ class Endboss extends MovableObject {
     }
 
     playFightAnimation() {
-        console.log(this.x)
-        if (this.x == 2000 || this.x == 2020 /*&& this.x >= 1500*/ ) {
+
+        if (this.x > 1999 && this.x >= 1500 && world.character.x >= 1800) {
             clearInterval(this.moveRightF);
             clearInterval(this.moveRightAnimationF);
             //if (!this.moveRightF) {
@@ -99,7 +99,7 @@ class Endboss extends MovableObject {
             this.moveLeftAnimationF = setInterval(() => {
                 this.playAnimation(this.IMAGES_WALKING)
             }, 200)
-        } else if (this.x <= 1500) {
+        } else if (this.x <= 1500 && world.character.x >= 1800) {
             clearInterval(this.moveLeftF);
             clearInterval(this.moveLeftAnimationF);
             //this.moveLeftF = null;
@@ -111,5 +111,17 @@ class Endboss extends MovableObject {
                 this.playAnimation(this.IMAGES_WALKING)
             }, 200)
         }
+
+        /*
+        if (world.character.x - this.x <= -200) {
+            setInterval(() => {
+                this.moveLeft()
+            }, 20)
+        } else if (world.character.x - this.x >= 200) {
+            setInterval(() => {
+                this.moveRight()
+            }, 20)
+        }
+        */
     }
 }

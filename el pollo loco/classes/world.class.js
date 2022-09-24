@@ -132,12 +132,15 @@ class World {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy) && this.character.isAboveGround()) {
                 let index = this.level.enemies.indexOf(enemy);
-                this.enemies[index].playAnimationBot();
-                //setTimeout(this.level.enemies.splice(index, 1), 2000);
-                //this.character.energy = 100;
-                //this.statusBar.setPercentage(this.character.energy);
+                this.enemies[index].dead = true;
+                console.log(this.enemies[index].dead);
+                //setTimeout(this.killChicken(index), 5000);
             }
         });
+    }
+
+    killChicken(index) {
+        this.level.enemies.splice(index, 1);
     }
 
     checkHealth() {

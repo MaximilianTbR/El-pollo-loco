@@ -29,8 +29,9 @@ class MovableObject extends DrawableObject {
     }
 
     hit() {
-        if (!(this.character.y < this.character.groundPosition)) {
+        if (!this.isAboveGround()) {
             this.energy -= 5;
+            console.log('hit!')
             if (this.energy < 0) {
                 this.energy = 0;
             } else {
