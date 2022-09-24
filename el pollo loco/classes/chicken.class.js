@@ -10,6 +10,14 @@ class Chicken extends MovableObject {
     ];
 
     IMAGES_DEAD = [
+        'img/3_enemies_chicken/chicken_normal/2_dead/dead.png',
+        'img/3_enemies_chicken/chicken_normal/2_dead/dead.png',
+        'img/3_enemies_chicken/chicken_normal/2_dead/dead.png',
+        'img/3_enemies_chicken/chicken_normal/2_dead/dead.png',
+        'img/3_enemies_chicken/chicken_normal/2_dead/dead.png',
+        'img/3_enemies_chicken/chicken_normal/2_dead/dead.png',
+        'img/3_enemies_chicken/chicken_normal/2_dead/dead.png',
+        'img/3_enemies_chicken/chicken_normal/2_dead/dead.png',
         'img/3_enemies_chicken/chicken_normal/2_dead/dead.png'
     ];
     currentImage = 0;
@@ -26,7 +34,10 @@ class Chicken extends MovableObject {
     }
 
     playAnimationBot() {
-        this.playAnimation(this.IMAGES_DEAD);
+        let myInterval = setInterval(() => {
+            this.playAnimation(this.IMAGES_DEAD);
+        }, 200)
+        setTimeout(clearInterval(myInterval), 3000);
     }
 
     animate() {

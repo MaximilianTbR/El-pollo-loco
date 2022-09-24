@@ -9,6 +9,13 @@ class smallChicken extends MovableObject {
     ];
 
     IMAGES_DEAD = [
+        'img/3_enemies_chicken/chicken_small/2_dead/dead.png',
+        'img/3_enemies_chicken/chicken_small/2_dead/dead.png',
+        'img/3_enemies_chicken/chicken_small/2_dead/dead.png',
+        'img/3_enemies_chicken/chicken_small/2_dead/dead.png',
+        'img/3_enemies_chicken/chicken_small/2_dead/dead.png',
+        'img/3_enemies_chicken/chicken_small/2_dead/dead.png',
+        'img/3_enemies_chicken/chicken_small/2_dead/dead.png',
         'img/3_enemies_chicken/chicken_small/2_dead/dead.png'
     ];
 
@@ -23,7 +30,11 @@ class smallChicken extends MovableObject {
     }
 
     playAnimationBot() {
-        this.playAnimation(this.IMAGES_DEAD);
+        console.log('function works for small chicken');
+        let myInterval = setInterval(() => {
+            this.playAnimation(this.IMAGES_DEAD);
+        }, 200)
+        setTimeout(clearInterval(myInterval), 3000);
     }
 
     animate() {

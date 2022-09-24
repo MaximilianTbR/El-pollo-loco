@@ -1,4 +1,4 @@
-class Win extends DrawableObject {
+class GameWonScreen extends DrawableObject {
 
     constructor() {
         super().loadImage('img/5_background/won.png.png');

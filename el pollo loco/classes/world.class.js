@@ -9,7 +9,6 @@ class World {
     collectableBottles = level1.collectableBottles;
     collectableCoins = level1.collectableCoins;
     thrownObjects = level1.thrownObjects;
-    collectedBottles = 0;
     canvas;
     ctx;
     keyboard;
@@ -17,9 +16,12 @@ class World {
     moneyBar = new MoneyBar();
     statusBar = new StatusBar();
     bottleBar = new BottleBar();
+    endbossbar = new EndbossStatusbar();
     collectableObjectsMoney = [];
-    throwableObjects = [];
-    bottle;
+    gameOver = false;
+    gameWon = false;
+    gameOverScreen = new GameOverScreen();
+    gameWonScreen = new GameWonScreen();
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -41,12 +43,17 @@ class World {
 
         this.addObjectsToMap(this.level.backgroundObjects);
         this.addToMap(this.character);
-        this.addObjectsToMap(this.throwableObjects);
+        this.addObjectsToMap(this.thrownObjects);
 
         this.ctx.translate(-this.camera_x, 0);
         this.addToMap(this.statusBar);
         this.addToMap(this.moneyBar);
         this.addToMap(this.bottleBar);
+        this.level.endboss.forEach(endboss => {
+            if (endboss.endbossIsIn == true) {
+                this.addToMap(this.endbossbar);
+            }
+        })
         this.ctx.translate(this.camera_x, 0);
 
         this.addObjectsToMap(this.level.clouds);
@@ -55,18 +62,16 @@ class World {
         this.addObjectsToMap(this.level.collectableBottles);
         this.addObjectsToMap(this.level.collectableCoins);
         this.ctx.translate(-this.camera_x, 0);
-
+        if (this.gameOver == true) {
+            this.addToMap(this.gameOverScreen);
+        } else if (this.gameWon) {
+            this.addToMap(this.gameWonScreen);
+        }
         // draw() will be executed over and over again
         let self = this;
         requestAnimationFrame(function() {
             self.draw();
         });
-
-        if (this.defeat) {
-            this.addToMap(this.youAreDefeated);
-        } else if (this.win) {
-            this.addToMap(this.youWin);
-        }
     }
 
     addObjectsToMap(objects) {
@@ -83,7 +88,7 @@ class World {
         mo.draw(this.ctx);
 
         if (mo.otherDirection) {
-            this.flipImageBack(mo);
+            this.flipImage(mo);
         }
     }
 
@@ -102,6 +107,7 @@ class World {
     run() { // function, that contains essential functions for the game which runs nearly the whole time
         setInterval(() => {
             this.checkCollisions();
+            this.checkHealth();
             this.checkCollectingBottles();
             this.checkCollectingCoins();
             this.checkThrowObjects();
@@ -127,9 +133,17 @@ class World {
             if (this.character.isColliding(enemy) && this.character.isAboveGround()) {
                 let index = this.level.enemies.indexOf(enemy);
                 this.enemies[index].playAnimationBot();
-                this.level.enemies.splice(enemy, 1);
+                //setTimeout(this.level.enemies.splice(index, 1), 2000);
+                //this.character.energy = 100;
+                //this.statusBar.setPercentage(this.character.energy);
             }
         });
+    }
+
+    checkHealth() {
+        if (this.character.energy == 0) {
+            this.gameOver = true;
+        }
     }
 
     checkCollisionWithBottles() {
@@ -162,10 +176,11 @@ class World {
 
     checkThrowObjects() {
         if (this.keyboard.D && this.character.collectedBottles > 0) {
-            let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100)
-            this.throwableObjects.push(bottle);
             this.character.collectedBottles -= 1;
             this.bottleBar.setPercentage(this.character.bottle);
+            this.level.thrownObjects.push(new ThrowableObject(this.character.x + 100, this.character.y + 100));
         }
     }
+
+    //&& this.character.collectedBottles > 0
 }

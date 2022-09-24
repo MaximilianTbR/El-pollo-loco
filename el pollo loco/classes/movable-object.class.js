@@ -19,7 +19,6 @@ class MovableObject extends DrawableObject {
 
     isAboveGround() {
         return this.y < this.groundPosition;
-        console.log(level1.thrownObjects);
     }
 
     isColliding(mo) {
@@ -30,12 +29,15 @@ class MovableObject extends DrawableObject {
     }
 
     hit() {
-        this.energy -= 5;
-        if (this.energy < 0) {
-            this.energy = 0;
-        } else {
-            this.lastHit = new Date().getTime();
+        if (!(this.character.y < this.character.groundPosition)) {
+            this.energy -= 5;
+            if (this.energy < 0) {
+                this.energy = 0;
+            } else {
+                this.lastHit = new Date().getTime();
+            }
         }
+        //console.log(this.world.thrownObjects);
     }
 
     isDead() {

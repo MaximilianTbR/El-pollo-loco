@@ -1,4 +1,4 @@
-class Defeat extends DrawableObject {
+class GameOverScreen extends DrawableObject {
     constructor() {
         super().loadImage('img/5_background/game-over-screen.png');
 

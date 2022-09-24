@@ -76,6 +76,9 @@ class Character extends MovableObject {
             if (this.world.keyboard.D) {
                 this.throwing_sound.play();
             }
+            if (this.world.keyboard.R) {
+                location.reload();
+            }
             this.world.camera_x = -this.x + 100;
         }, 1000 / 60)
 
@@ -83,7 +86,7 @@ class Character extends MovableObject {
         setInterval(() => {
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
-                console.log('Collision with character, energy', this.character.energy);
+                //this.playAnimation(this.IMAGES)
             }
             if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);

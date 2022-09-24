@@ -11,7 +11,8 @@ function init() {
 }
 
 function startGame() {
-    document.getElementById('start-screen').classList.add('d-none')
+    document.getElementById('start-screen').classList.add('d-none');
+    console.log()
     document.getElementById('canvas').classList.add('start-screen-shadow');
     document.getElementById('btn').classList.add('d-none');
     document.getElementById('canvas').classList.remove('canvas-1');
@@ -38,6 +39,9 @@ document.addEventListener('keydown', (e) => {
     if (e.keyCode == 68) {
         keyboard.D = true;
     }
+    if (e.keyCode == 82) {
+        keyboard.R = true;
+    }
 });
 
 document.addEventListener('keyup', (e) => {
@@ -58,6 +62,9 @@ document.addEventListener('keyup', (e) => {
     }
     if (e.keyCode == 68) {
         keyboard.D = false;
+    }
+    if (e.keyCode == 82) {
+        keyboard.R = false;
     }
 });
 
