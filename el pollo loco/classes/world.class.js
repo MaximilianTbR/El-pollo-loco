@@ -139,6 +139,14 @@ class World {
                 }, 1000)
             }
         });
+
+        this.level.thrownObjects.forEach((bottle) => {
+            this.level.enemies.forEach((enemy) => {
+                if (bottle.isColliding(enemy)) {
+                    console.log('is Colliding');
+                }
+            })
+        })
     }
 
     killChicken(index) {
@@ -151,11 +159,7 @@ class World {
         }
     }
 
-    checkCollisionWithBottles() {
-        if (this instanceof throwableObject().isColliding(enemy)) {
-            console.log('bottled hitted!');
-        }
-    }
+    checkCollisionWithBottles() {}
 
     checkCollectingBottles() {
         this.level.collectableBottles.forEach((collectableObject) => {

@@ -35,14 +35,14 @@ class ThrowableObject extends MovableObject {
         this.y = y;
         this.height = 60;
         this.width = 50;
-        this.speedY = 30;
-        this.speed = 20;
+        this.speedY = 25;
+        this.speed = 10;
         this.throw();
     }
 
     throw () {
+        this.applyGravity();
         setInterval(() => {
-            this.applyGravity();
             this.moveObject();
             this.playObject();
         }, 25);
@@ -75,6 +75,11 @@ class ThrowableObject extends MovableObject {
     playSplash() {
         this.playAnimation(this.IMAGES_SPLASH);
         let index = world.level.thrownObjects.indexOf(this);
-        // world.level.thrownObjects.splice(index, 1), 500;
+        try {
+            world.level.thrownObjects.splice(index, 1), 500;
+        } catch (e) {
+            console.log(e);
+        }
+        //console.log()
     }
 }
