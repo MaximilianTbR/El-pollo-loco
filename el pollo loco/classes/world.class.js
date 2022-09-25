@@ -134,7 +134,9 @@ class World {
                 let index = this.level.enemies.indexOf(enemy);
                 this.enemies[index].dead = true;
                 console.log(this.enemies[index].dead);
-                //setTimeout(this.killChicken(index), 5000);
+                setTimeout(() => {
+                    this.killChicken(index);
+                }, 1000)
             }
         });
     }

@@ -41,6 +41,7 @@ class smallChicken extends MovableObject {
     }
 
     animate() {
+        /*
         if (this.dead == false) {
             setInterval(() => {
                 this.playAnimation(this.IMAGES_WALKING)
@@ -55,5 +56,14 @@ class smallChicken extends MovableObject {
             }, 200)
             clearInterval(this.myInterval);
         }
+        */
+        setInterval(() => {
+            if (!this.dead) {
+                this.playAnimation(this.IMAGES_WALKING)
+                this.moveLeft()
+            } else {
+                this.playAnimation(this.IMAGES_DEAD);
+            }
+        }, 1000 / 40);
     }
 }
