@@ -31,14 +31,12 @@ class MovableObject extends DrawableObject {
     hit() {
         if (!this.isAboveGround()) {
             this.energy -= 5;
-            console.log('hit!')
             if (this.energy < 0) {
                 this.energy = 0;
             } else {
                 this.lastHit = new Date().getTime();
             }
         }
-        //console.log(this.world.thrownObjects);
     }
 
     isDead() {

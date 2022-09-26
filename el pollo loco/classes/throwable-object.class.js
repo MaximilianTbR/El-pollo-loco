@@ -44,8 +44,8 @@ class ThrowableObject extends MovableObject {
         this.applyGravity();
         setInterval(() => {
             this.moveObject();
-            this.playObject();
         }, 25);
+        this.playObject();
     }
 
     moveObject() {
@@ -61,11 +61,14 @@ class ThrowableObject extends MovableObject {
     }
 
     playObject() {
-        if (this.isAboveGround()) {
-            this.playRotation();
-        } else if (this.y == 350) {
-            this.playSplash();
-        }
+        let myInterval = setInterval(() => {
+            if (this.isAboveGround()) {
+                this.playRotation();
+            } else if (this.y == 350) {
+                this.playSplash();
+                clearInterval(myInterval)
+            }
+        }, 25)
     }
 
     playRotation() {
@@ -75,11 +78,12 @@ class ThrowableObject extends MovableObject {
     playSplash() {
         this.playAnimation(this.IMAGES_SPLASH);
         let index = world.level.thrownObjects.indexOf(this);
-        try {
-            world.level.thrownObjects.splice(index, 1), 500;
-        } catch (e) {
-            console.log(e);
-        }
-        //console.log()
+        setTimeout(() => {
+            this.spliceIndex(index)
+        }, 50);
+    }
+
+    spliceIndex(index) {
+        world.level.thrownObjects.splice(index, 1);
     }
 }

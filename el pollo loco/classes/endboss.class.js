@@ -10,6 +10,8 @@ class Endboss extends MovableObject {
     moveLeftF;
     moveLeftAnimationF;
     isCleared = false;
+    dead = false;
+    //energy = 100;
 
 
     IMAGES_SPAWNING = [
@@ -61,6 +63,8 @@ class Endboss extends MovableObject {
         super().loadImage(this.IMAGES_WALKING[0]);
         this.loadImages(this.IMAGES_SPAWNING);
         this.loadImages(this.IMAGES_WALKING);
+        this.loadImages(this.IMAGES_HURT);
+        this.loadImages(this.IMAGES_DEAD);
         this.x = 2000;
         this.speed = 20;
         this.animate();
@@ -84,6 +88,11 @@ class Endboss extends MovableObject {
                 this.endbossIsIn = true;
                 this.playFightAnimation()
             }
+            if (this.dead == true) {
+                this.endbossIsIn = false;
+                this.hadFirstContact = false;
+                this.playAnimation(this.IMAGES_DEAD);
+            }
         }, 200)
     }
 
@@ -92,7 +101,6 @@ class Endboss extends MovableObject {
         if (this.x > 1999 && this.x >= 1500 && world.character.x >= 1800) {
             clearInterval(this.moveRightF);
             clearInterval(this.moveRightAnimationF);
-            //if (!this.moveRightF) {
             this.moveLeftF = setInterval(() => {
                 this.moveLeft()
             }, 20)
@@ -102,8 +110,6 @@ class Endboss extends MovableObject {
         } else if (this.x <= 1500 && world.character.x >= 1800) {
             clearInterval(this.moveLeftF);
             clearInterval(this.moveLeftAnimationF);
-            //this.moveLeftF = null;
-            //this.moveLeftAnimationF = null;
             this.moveRightF = setInterval(() => {
                 this.moveRight()
             }, 20)
@@ -111,17 +117,5 @@ class Endboss extends MovableObject {
                 this.playAnimation(this.IMAGES_WALKING)
             }, 200)
         }
-
-        /*
-        if (world.character.x - this.x <= -200) {
-            setInterval(() => {
-                this.moveLeft()
-            }, 20)
-        } else if (world.character.x - this.x >= 200) {
-            setInterval(() => {
-                this.moveRight()
-            }, 20)
-        }
-        */
     }
 }

@@ -3,6 +3,7 @@ class World {
     character = new Character();
     level = level1;
     enemies = level1.enemies;
+    endboss = level1.endboss;
     clouds = level1.clouds;
     backgroundObjects = level1.backgroundObjects;
     endboss = level1.endboss;
@@ -133,7 +134,6 @@ class World {
             if (this.character.isColliding(enemy) && this.character.isAboveGround()) {
                 let index = this.level.enemies.indexOf(enemy);
                 this.enemies[index].dead = true;
-                console.log(this.enemies[index].dead);
                 setTimeout(() => {
                     this.killChicken(index);
                 }, 1000)
@@ -143,14 +143,41 @@ class World {
         this.level.thrownObjects.forEach((bottle) => {
             this.level.enemies.forEach((enemy) => {
                 if (bottle.isColliding(enemy)) {
-                    console.log('is Colliding');
+                    let index = this.level.enemies.indexOf(enemy);
+                    this.enemies[index].dead = true;
+                    setTimeout(() => {
+                        this.killEndboss(index);
+                    }, 1000)
                 }
             })
         })
+
+        this.level.thrownObjects.forEach((bottle) => {
+            this.level.endboss.forEach((endboss) => {
+                if (bottle.isColliding(endboss) && this.endboss.energy > 5) {
+                    console.log('isHit()')
+                    this.endboss.hit();
+                }
+                if (bottle.isColliding(endboss) && this.endboss.energy == 5 || 0) {
+                    console.log(this.endboss.energy)
+                    let index = this.level.endboss.indexOf(endboss);
+                    this.endboss[index].dead = true;
+                    setTimeout(() => {
+                        this.killEndboss(index);
+                    }, 1000)
+                }
+            })
+        })
+
+        console.log(this.endboss.energy);
     }
 
     killChicken(index) {
         this.level.enemies.splice(index, 1);
+    }
+
+    killEndboss(index) {
+        this.level.endboss.splice(index, 1);
     }
 
     checkHealth() {
@@ -158,8 +185,6 @@ class World {
             this.gameOver = true;
         }
     }
-
-    checkCollisionWithBottles() {}
 
     checkCollectingBottles() {
         this.level.collectableBottles.forEach((collectableObject) => {
