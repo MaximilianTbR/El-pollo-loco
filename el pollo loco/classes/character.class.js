@@ -80,6 +80,7 @@ class Character extends MovableObject {
                 location.reload();
             }
             this.world.camera_x = -this.x + 100;
+            console.log(this.x)
         }, 1000 / 60)
 
         //Walk animation 

@@ -80,7 +80,7 @@ class ThrowableObject extends MovableObject {
         let index = world.level.thrownObjects.indexOf(this);
         setTimeout(() => {
             this.spliceIndex(index)
-        }, 50);
+        }, 100);
     }
 
     spliceIndex(index) {

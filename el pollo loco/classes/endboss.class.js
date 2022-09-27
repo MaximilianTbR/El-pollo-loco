@@ -11,7 +11,7 @@ class Endboss extends MovableObject {
     moveLeftAnimationF;
     isCleared = false;
     dead = false;
-    //energy = 100;
+    energy = 100;
 
 
     IMAGES_SPAWNING = [
@@ -97,8 +97,7 @@ class Endboss extends MovableObject {
     }
 
     playFightAnimation() {
-
-        if (this.x > 1999 && this.x >= 1500 && world.character.x >= 1800) {
+        if (this.x > 1999 && this.x >= 1500 && world.character.x >= 1500) {
             clearInterval(this.moveRightF);
             clearInterval(this.moveRightAnimationF);
             this.moveLeftF = setInterval(() => {
@@ -117,5 +116,20 @@ class Endboss extends MovableObject {
                 this.playAnimation(this.IMAGES_WALKING)
             }, 200)
         }
+    }
+
+    isHitted() {
+        this.energy -= 10;
+        if (this.energy < 0) {
+            this.energy = 0;
+        } else {
+            this.lastHit = new Date().getTime();
+        }
+    }
+
+    EndbossisHurt() {
+        let timepassed = new Date().getTime() - this.lastHit;
+        timepassed = timepassed / 1000; // Difference in s
+        return timepassed < 2;
     }
 }

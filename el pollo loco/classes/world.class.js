@@ -65,7 +65,7 @@ class World {
         this.ctx.translate(-this.camera_x, 0);
         if (this.gameOver == true) {
             this.addToMap(this.gameOverScreen);
-        } else if (this.gameWon) {
+        } else if (this.gameWon == true) {
             this.addToMap(this.gameWonScreen);
         }
         // draw() will be executed over and over again
@@ -148,20 +148,22 @@ class World {
                     setTimeout(() => {
                         this.killEndboss(index);
                     }, 1000)
+
                 }
             })
         })
 
         this.level.thrownObjects.forEach((bottle) => {
             this.level.endboss.forEach((endboss) => {
-                if (bottle.isColliding(endboss) && this.endboss.energy > 5) {
-                    console.log('isHit()')
-                    this.endboss.hit();
+                if (bottle.isColliding(endboss) && this.endboss[0].energy > 5) {
+                    console.log(this.endboss[0].energy);
+                    this.endboss[0].isHitted();
                 }
-                if (bottle.isColliding(endboss) && this.endboss.energy == 5 || 0) {
-                    console.log(this.endboss.energy)
+                if (bottle.isColliding(endboss) && this.endboss[0].energy == 0) {
+                    console.log(this.endboss[0].energy)
                     let index = this.level.endboss.indexOf(endboss);
                     this.endboss[index].dead = true;
+                    this.gameWon = true;
                     setTimeout(() => {
                         this.killEndboss(index);
                     }, 1000)
@@ -169,7 +171,9 @@ class World {
             })
         })
 
-        console.log(this.endboss.energy);
+        if (this.character.x >= 1500) {
+
+        }
     }
 
     killChicken(index) {
@@ -215,6 +219,4 @@ class World {
             this.level.thrownObjects.push(new ThrowableObject(this.character.x + 100, this.character.y + 100));
         }
     }
-
-    //&& this.character.collectedBottles > 0
 }
