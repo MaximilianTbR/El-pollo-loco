@@ -13,6 +13,10 @@ class Endboss extends MovableObject {
     dead = false;
     energy = 100;
 
+    dribbleAnimation = false;
+    left = false;
+    right = false;
+
 
     IMAGES_SPAWNING = [
         'img/4_enemie_boss_chicken/2_alert/G5.png',
@@ -98,25 +102,41 @@ class Endboss extends MovableObject {
 
     startEndFight() {
         if (world.character.x > 1310 && world.character.x < 1600) {
-            console.log('dribble animation') // here is move forward && backward animation
-            this.chargeAnimation();
+            this.runEndboss();
+            this.dribbleAnimation = true;
         } else if (world.character.x > 1600) {
             console.log('fight!') // here comes counter attack animation
         }
     }
 
-    chargeAnimation() {
-        this.moveLeft()
-        this.playAnimation(this.IMAGES_WALKING)
-        if (this.x >= 1600) {
+    runEndboss() {
+        if (this.dribbleAnimation == true) {
+            this.left = true;
+            while (this.left == true) {
+                this.moveLeft();
+                this.playAnimation(this.IMAGES_WALKING);
+                setTimeout(this.left = false, this.right = true, 2000);
+            }
+            while (this.right == true) {
+                this.moveRight();
+                this.playAnimation(this.IMAGES_WALKING);
+                setTimeout(this.right = false, this.right = true, 2000);
+            }
+        } else {
+            console.log('test')
+        }
+        setTimeout(this.dribbleAnimation = true, 1000);
+        /*if (this.x <= 1600) {
             clearInterval(this.moveLeft())
             clearInterval(this.playAnimation(this.IMAGES_WALKING));
             this.moveRight();
             this.playAnimation(this.IMAGES_WALKING);
-        } else if (this.x <= 1990) {
+            console.log('moveRight')
+        } else if (this.x >= 1990) {
             this.moveLeft();
             this.playAnimation(this.IMAGES_WALKING);
-        }
+            console.log('moveLeft')
+        }*/
     }
 
     isHitted() {
