@@ -80,13 +80,13 @@ class Endboss extends MovableObject {
             }
             i++;
 
-            if (world.character.x > 1500 && !this.hadFirstContact) { // WICHTIG: du musst noch an x-koordinate von character (world.character.x) erstmal rankommen, bedeutet, du musst diese Variable irgendwie von world-Klasse in diese Klasse hier bekommen (in Slack nachfragen)
+            if (world.character.x > 1310 && !this.hadFirstContact) { // WICHTIG: du musst noch an x-koordinate von character (world.character.x) erstmal rankommen, bedeutet, du musst diese Variable irgendwie von world-Klasse in diese Klasse hier bekommen (in Slack nachfragen)
                 i = 0;
                 this.hadFirstContact = true;
             }
             if (this.hadFirstContact == true) {
                 this.endbossIsIn = true;
-                this.playFightAnimation()
+                this.startEndFight()
             }
             if (this.dead == true) {
                 this.endbossIsIn = false;
@@ -96,30 +96,32 @@ class Endboss extends MovableObject {
         }, 200)
     }
 
-    playFightAnimation() {
-        if (this.x > 1999 && this.x >= 1500 && world.character.x >= 1500) {
-            clearInterval(this.moveRightF);
-            clearInterval(this.moveRightAnimationF);
-            this.moveLeftF = setInterval(() => {
-                this.moveLeft()
-            }, 20)
-            this.moveLeftAnimationF = setInterval(() => {
-                this.playAnimation(this.IMAGES_WALKING)
-            }, 200)
-        } else if (this.x <= 1500 && world.character.x >= 1800) {
-            clearInterval(this.moveLeftF);
-            clearInterval(this.moveLeftAnimationF);
-            this.moveRightF = setInterval(() => {
-                this.moveRight()
-            }, 20)
-            this.moveRightAnimationF = setInterval(() => {
-                this.playAnimation(this.IMAGES_WALKING)
-            }, 200)
+    startEndFight() {
+        if (world.character.x > 1310 && world.character.x < 1600) {
+            console.log('dribble animation') // here is move forward && backward animation
+            this.chargeAnimation();
+        } else if (world.character.x > 1600) {
+            console.log('fight!') // here comes counter attack animation
+        }
+    }
+
+    chargeAnimation() {
+        this.moveLeft()
+        this.playAnimation(this.IMAGES_WALKING)
+        if (this.x >= 1600) {
+            clearInterval(this.moveLeft())
+            clearInterval(this.playAnimation(this.IMAGES_WALKING));
+            this.moveRight();
+            this.playAnimation(this.IMAGES_WALKING);
+        } else if (this.x <= 1990) {
+            this.moveLeft();
+            this.playAnimation(this.IMAGES_WALKING);
         }
     }
 
     isHitted() {
         this.energy -= 10;
+        this.playAnimation(this.IMAGES_HURT);
         if (this.energy < 0) {
             this.energy = 0;
         } else {

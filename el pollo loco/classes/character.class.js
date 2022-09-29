@@ -64,10 +64,17 @@ class Character extends MovableObject {
                 this.moveRight();
                 this.walking_sound.play();
             }
-            if (this.world.keyboard.LEFT && this.x > 0) {
+            if (this.world.keyboard.LEFT && this.x > 0 && this.world.endbossMode == false) {
                 this.otherDirection = true;
                 this.moveLeft();
                 this.walking_sound.play();
+            }
+            if (this.world.keyboard.LEFT && this.x > 0 && this.world.endbossMode == true) {
+                if (this.x > 1310) {
+                    this.otherDirection = true;
+                    this.moveLeft();
+                    this.walking_sound.play()
+                }
             }
             if (this.world.keyboard.UP && !this.isAboveGround() || this.world.keyboard.SPACE && !this.isAboveGround()) {
                 this.jump();
@@ -80,7 +87,6 @@ class Character extends MovableObject {
                 location.reload();
             }
             this.world.camera_x = -this.x + 100;
-            console.log(this.x)
         }, 1000 / 60)
 
         //Walk animation 

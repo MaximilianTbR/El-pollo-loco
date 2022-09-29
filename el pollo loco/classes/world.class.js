@@ -23,6 +23,7 @@ class World {
     gameWon = false;
     gameOverScreen = new GameOverScreen();
     gameWonScreen = new GameWonScreen();
+    endbossMode = false;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -156,11 +157,10 @@ class World {
         this.level.thrownObjects.forEach((bottle) => {
             this.level.endboss.forEach((endboss) => {
                 if (bottle.isColliding(endboss) && this.endboss[0].energy > 5) {
-                    console.log(this.endboss[0].energy);
                     this.endboss[0].isHitted();
+                    this.endbossbar.setPercentage(this.endboss[0].energy);
                 }
                 if (bottle.isColliding(endboss) && this.endboss[0].energy == 0) {
-                    console.log(this.endboss[0].energy)
                     let index = this.level.endboss.indexOf(endboss);
                     this.endboss[index].dead = true;
                     this.gameWon = true;
@@ -171,8 +171,8 @@ class World {
             })
         })
 
-        if (this.character.x >= 1500) {
-
+        if (this.character.x >= 1310) {
+            this.endbossMode = true;
         }
     }
 
