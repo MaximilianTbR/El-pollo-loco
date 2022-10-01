@@ -104,46 +104,65 @@ class Endboss extends MovableObject {
     }
 
     startEndFight() {
-        if (world.character.x > 1310 && world.character.x < 1600) {
-            this.runEndboss();
-            this.dribbleAnimation = true;
-        } else if (world.character.x > 1600) {
-            this.left = false;
-            this.right = false;
-            this.counterLeft = true;
-            this.counterRight = false;
-        }
+        setInterval(() => {
+            if (world.character.x > 1310 && world.character.x < 1600) {
+                this.runEndboss();
+                this.dribbleAnimation = true;
+            } else if (world.character.x > 1600) {
+                this.left = false;
+                this.counterLeft = true;
+            }
+        }, 500)
     }
 
     runEndboss() {
-        setInterval(() => {
-            if (this.dribbleAnimation == true) {
-                if (this.left == true) {
-                    this.moveLeft();
-                    this.playAnimation(this.IMAGES_WALKING);
-                    if (this.x <= 1600) {
-                        this.left = false;
-                        this.right = true;
-                    }
-                } else if (this.counterLeft == true || this.EndbossisHurt()) {
-                    this.moveLeft();
-                    this.playAnimation(this.IMAGES_ATTACK);
-                    if (this.x <= 1450) {
-                        this.counterLeft = false;
-                        this.right = true;
-                    }
-                } else if (this.right == true) {
-                    this.moveRight();
-                    this.playAnimation(this.IMAGES_WALKING);
-                    if (this.x > 1950) {
-                        this.right = false;
-                        this.left = true;
-                    }
-                }
-            } else {
-                console.log('test')
+        if (this.dribbleAnimation == true) {
+            if (this.left == true) {
+                this.EndbossMovesLeft();
+            } else if (this.counterLeft == true || this.EndbossisHurt()) {
+                this.EndbossCounterAttack();
+            } else if (this.right == true) {
+                this.EndbossMovesRight();
             }
-        }, 100)
+        }
+    }
+
+    EndbossMovesLeft() {
+        let myInterval1 = setInterval(() => {
+            this.moveLeft();
+            this.playAnimation(this.IMAGES_WALKING);
+            if (this.x <= 1600) {
+                this.left = false;
+                this.right = true;
+                clearInterval(myInterval1);
+            }
+        }, 500)
+    }
+
+    EndbossMovesRight() {
+        let myInterval2 = setInterval(() => {
+            this.moveRight();
+            this.playAnimation(this.IMAGES_WALKING);
+            console.log('right')
+            if (this.x > 1950) {
+                this.right = false;
+                this.left = true;
+                clearInterval(myInterval2);
+            }
+        }, 500)
+    }
+
+    EndbossCounterAttack() {
+        let myInterval3 = setInterval(() => {
+            this.moveLeft();
+            this.playAnimation(this.IMAGES_ATTACK);
+            console.log('counterattack');
+            if (this.x <= 1450) {
+                this.counterLeft = false;
+                this.right = true;
+                clearInterval(myInterval3);
+            }
+        }, 500)
     }
 
     isHitted() {

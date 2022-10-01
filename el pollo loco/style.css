@@ -178,7 +178,16 @@ canvas {
     flex-direction: column;
 }
 
-@media only screen and (max-width: 720px) {
+@media only screen and (max-width: 920px) and (min-width: 720px) {
+    .all-info-keys {
+        display: none !important;
+    }
+    .whole-body-upper-content {
+        height: 640px !important;
+    }
+}
+
+@media only screen and (max-width: 720px) and (min-width: 620px) {
     canvas {
         width: 100%;
         object-fit: contain;
@@ -200,9 +209,36 @@ canvas {
     }
     .whole-body-upper-content {
         width: 100%;
+        height: 620px;
     }
     .all-info-keys {
         display: none;
+    }
+    .header {
+        margin: 0px;
+    }
+    .btn {
+        background-color: #8A5837;
+        width: 110px;
+        height: 40px;
+        position: absolute;
+        z-index: 3;
+        top: 25.5rem;
+        border-radius: 7px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-weight: 700;
+        border: none;
+        font-size: 16px;
+        color: white;
+    }
+}
+
+@media only screen and (max-width: 620px) {
+    .canvas-2 {
+        margin-bottom: 20px;
+    }
+    .whole.whole-body-upper-content {
+        height: 545px !important;
     }
 }
 
