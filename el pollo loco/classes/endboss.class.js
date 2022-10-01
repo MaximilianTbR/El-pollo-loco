@@ -14,8 +14,10 @@ class Endboss extends MovableObject {
     energy = 100;
 
     dribbleAnimation = false;
-    left = false;
+    left = true;
     right = false;
+    counterLeft = false;
+    counterRight = false
 
 
     IMAGES_SPAWNING = [
@@ -69,6 +71,7 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
+        this.loadImages(this.IMAGES_ATTACK);
         this.x = 2000;
         this.speed = 20;
         this.animate();
@@ -105,38 +108,42 @@ class Endboss extends MovableObject {
             this.runEndboss();
             this.dribbleAnimation = true;
         } else if (world.character.x > 1600) {
-            console.log('fight!') // here comes counter attack animation
+            this.left = false;
+            this.right = false;
+            this.counterLeft = true;
+            this.counterRight = false;
         }
     }
 
     runEndboss() {
-        if (this.dribbleAnimation == true) {
-            this.left = true;
-            while (this.left == true) {
-                this.moveLeft();
-                this.playAnimation(this.IMAGES_WALKING);
-                setTimeout(this.left = false, this.right = true, 2000);
+        setInterval(() => {
+            if (this.dribbleAnimation == true) {
+                if (this.left == true) {
+                    this.moveLeft();
+                    this.playAnimation(this.IMAGES_WALKING);
+                    if (this.x <= 1600) {
+                        this.left = false;
+                        this.right = true;
+                    }
+                } else if (this.counterLeft == true || this.EndbossisHurt()) {
+                    this.moveLeft();
+                    this.playAnimation(this.IMAGES_ATTACK);
+                    if (this.x <= 1450) {
+                        this.counterLeft = false;
+                        this.right = true;
+                    }
+                } else if (this.right == true) {
+                    this.moveRight();
+                    this.playAnimation(this.IMAGES_WALKING);
+                    if (this.x > 1950) {
+                        this.right = false;
+                        this.left = true;
+                    }
+                }
+            } else {
+                console.log('test')
             }
-            while (this.right == true) {
-                this.moveRight();
-                this.playAnimation(this.IMAGES_WALKING);
-                setTimeout(this.right = false, this.right = true, 2000);
-            }
-        } else {
-            console.log('test')
-        }
-        setTimeout(this.dribbleAnimation = true, 1000);
-        /*if (this.x <= 1600) {
-            clearInterval(this.moveLeft())
-            clearInterval(this.playAnimation(this.IMAGES_WALKING));
-            this.moveRight();
-            this.playAnimation(this.IMAGES_WALKING);
-            console.log('moveRight')
-        } else if (this.x >= 1990) {
-            this.moveLeft();
-            this.playAnimation(this.IMAGES_WALKING);
-            console.log('moveLeft')
-        }*/
+        }, 100)
     }
 
     isHitted() {
