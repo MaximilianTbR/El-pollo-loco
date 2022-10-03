@@ -106,8 +106,9 @@ class Endboss extends MovableObject {
 
     startEndFight() {
         if (world.character.x > 1310 && world.character.x < 1600) {
+            clearInterval(this.myInterval2);
             this.myInterval1 = setInterval(() => {
-                clearInterval(this.myInterval2);
+                console.log('dribble');
                 if (this.directionX) {
                     this.x -= 1;
                     if (this.x < this.middleX - this.movement) {
@@ -124,16 +125,16 @@ class Endboss extends MovableObject {
             //this.counterAttackBL = false;
             //this.moveLeftRightBL = true;
         } else if (world.character.x > 1600 || this.EndbossisHurt()) {
+            clearInterval(this.myInterval1);
             this.myInterval2 = setInterval(() => {
-                clearInterval(this.myInterval1);
+                console.log('counterattack');
                 this.x -= this.speed;
                 this.playAnimation(this.IMAGES_ATTACK);
-                console.log('counterattack');
                 if (this.x < 1500) {
                     if (this.x < this.middleX) {
                         this.x += this.speed;
                     } else if (this.x >= this.middleX) {
-                        clearInterval(this.myInterval3);
+                        clearInterval(this.myInterval2);
                     }
                 }
             }, 500);
