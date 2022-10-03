@@ -5,19 +5,20 @@ class Endboss extends MovableObject {
     y = 60;
     world = World;
 
-    moveRightF;
-    moveRightAnimationF;
-    moveLeftF;
-    moveLeftAnimationF;
     isCleared = false;
     dead = false;
     energy = 100;
 
-    dribbleAnimation = false;
-    left = true;
-    right = false;
-    counterLeft = false;
-    counterRight = false
+    direction = true;
+    directionX = true;
+    middleX = 1850;
+    movement = 50;
+
+    moveLeftRightBL = false;
+    moveLeftRightIT;
+    myInterval1;
+    myInterval2;
+    myInterval3;
 
 
     IMAGES_SPAWNING = [
@@ -93,7 +94,7 @@ class Endboss extends MovableObject {
             }
             if (this.hadFirstContact == true) {
                 this.endbossIsIn = true;
-                this.startEndFight()
+                this.startEndFight();
             }
             if (this.dead == true) {
                 this.endbossIsIn = false;
@@ -104,63 +105,93 @@ class Endboss extends MovableObject {
     }
 
     startEndFight() {
-        setInterval(() => {
-            if (world.character.x > 1310 && world.character.x < 1600) {
-                this.runEndboss();
-                this.dribbleAnimation = true;
-            } else if (world.character.x > 1600) {
-                this.left = false;
-                this.counterLeft = true;
-            }
-        }, 500)
-    }
-
-    runEndboss() {
-        if (this.dribbleAnimation == true) {
-            if (this.left == true) {
-                this.EndbossMovesLeft();
-            } else if (this.counterLeft == true || this.EndbossisHurt()) {
-                this.EndbossCounterAttack();
-            } else if (this.right == true) {
-                this.EndbossMovesRight();
-            }
+        if (world.character.x > 1310 && world.character.x < 1600) {
+            this.myInterval1 = setInterval(() => {
+                clearInterval(this.myInterval2);
+                if (this.directionX) {
+                    this.x -= 1;
+                    if (this.x < this.middleX - this.movement) {
+                        this.directionX = false;
+                    }
+                }
+                if (!this.directionX) {
+                    this.x += 1;
+                    if (this.x > this.middleX + this.movement) {
+                        this.directionX = true;
+                    }
+                }
+            }, 500);
+            //this.counterAttackBL = false;
+            //this.moveLeftRightBL = true;
+        } else if (world.character.x > 1600 || this.EndbossisHurt()) {
+            this.myInterval2 = setInterval(() => {
+                clearInterval(this.myInterval1);
+                this.x -= this.speed;
+                this.playAnimation(this.IMAGES_ATTACK);
+                console.log('counterattack');
+                if (this.x < 1500) {
+                    if (this.x < this.middleX) {
+                        this.x += this.speed;
+                    } else if (this.x >= this.middleX) {
+                        clearInterval(this.myInterval3);
+                    }
+                }
+            }, 500);
+            /*if (this.x < 1600) {
+                this.moveBackToMiddleX();
+            }*/
+            //this.moveLeftRightBL = false;
+            //this.counterAttackBL = true;
+            //this.endbossCounterAttack();
         }
     }
 
-    EndbossMovesLeft() {
-        let myInterval1 = setInterval(() => {
-            this.moveLeft();
-            this.playAnimation(this.IMAGES_WALKING);
-            if (this.x <= 1600) {
-                this.left = false;
-                this.right = true;
-                clearInterval(myInterval1);
+    moveLeftRight() {
+        setInterval(() => {
+            if (this.moveLeftRightBL == true) {
+                if (this.directionX) {
+                    this.x -= 1;
+                    if (this.x < this.middleX - this.movement) {
+                        this.directionX = false;
+                    }
+                }
+                if (!this.directionX) {
+                    this.x += 1;
+                    if (this.x > this.middleX + this.movement) {
+                        this.directionX = true;
+                    }
+                }
             }
-        }, 500)
+            if (!this.moveLeftRightBL) {
+                clearInterval(this.myInterval);
+            }
+        }, 1000 / 50)
+
     }
 
-    EndbossMovesRight() {
-        let myInterval2 = setInterval(() => {
-            this.moveRight();
-            this.playAnimation(this.IMAGES_WALKING);
-            console.log('right')
-            if (this.x > 1950) {
-                this.right = false;
-                this.left = true;
-                clearInterval(myInterval2);
+    endbossCounterAttack() {
+        setInterval(() => {
+            if (this.counterAttackBL == true) {
+                this.moveLeft();
+                this.playAnimation(this.IMAGES_ATTACK);
+                console.log('counterattack');
+                if (this.x < 1600) {
+                    this.counterAttackBL = false;
+                    this.moveBackToMiddleX();
+                }
             }
-        }, 500)
+            if (!this.counterAttackBL) {
+                clearInterval(this.myInterval);
+            }
+        }, 1000 / 50)
     }
 
-    EndbossCounterAttack() {
-        let myInterval3 = setInterval(() => {
-            this.moveLeft();
-            this.playAnimation(this.IMAGES_ATTACK);
-            console.log('counterattack');
-            if (this.x <= 1450) {
-                this.counterLeft = false;
-                this.right = true;
-                clearInterval(myInterval3);
+    moveBackToMiddleX() {
+        this.myInterval3 = setInterval(() => {
+            if (this.x < this.middleX) {
+                this.moveRight();
+            } else if (this.x >= this.middleX) {
+                clearInterval(this.myInterval3);
             }
         }, 500)
     }
@@ -180,4 +211,43 @@ class Endboss extends MovableObject {
         timepassed = timepassed / 1000; // Difference in s
         return timepassed < 2;
     }
+
+    /*
+        runEndboss() {
+            if (this.dribbleAnimation == true) {
+                if (this.left == true) {
+                    this.EndbossMovesLeft();
+                } else if (this.counterLeft == true || this.EndbossisHurt()) {
+                    this.EndbossCounterAttack();
+                } else if (this.right == true) {
+                    this.EndbossMovesRight();
+                }
+            }
+        }
+
+        EndbossMovesLeft() {
+            let myInterval1 = setInterval(() => {
+                this.moveLeft();
+                this.playAnimation(this.IMAGES_WALKING);
+                if (this.x <= 1600) {
+                    this.left = false;
+                    this.right = true;
+                    clearInterval(myInterval1);
+                }
+            }, 500)
+        }
+
+        EndbossMovesRight() {
+            let myInterval2 = setInterval(() => {
+                this.moveRight();
+                this.playAnimation(this.IMAGES_WALKING);
+                console.log('right')
+                if (this.x > 1950) {
+                    this.right = false;
+                    this.left = true;
+                    clearInterval(myInterval2);
+                }
+            }, 500)
+        }
+    */
 }
