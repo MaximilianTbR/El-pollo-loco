@@ -119,6 +119,11 @@ class Endboss extends MovableObject {
     }
 
     executesDribbleAnimation() {
+        this.dribbleAnimationPartOne();
+        this.dribbleAnimationPartTwo();
+    }
+
+    dribbleAnimationPartOne() {
         if (this.directionX) {
             this.playAnimation(this.IMAGES_WALKING)
             this.x -= 20;
@@ -126,6 +131,9 @@ class Endboss extends MovableObject {
                 this.directionX = false;
             }
         }
+    }
+
+    dribbleAnimationPartTwo() {
         if (!this.directionX) {
             this.playAnimation(this.IMAGES_WALKING)
             this.x += 20;
@@ -139,6 +147,9 @@ class Endboss extends MovableObject {
         if (world.character.x > 1600 || this.EndbossisHurt()) {
             this.dribbleAnimation = false;
             this.playAnimation(this.IMAGES_ATTACK);
+            if (!this.counterAttackFirstPart && !this.counterAttackSecondPart) {
+                this.counterAttackFirstPart = true;
+            }
             this.executesCounterAttackFirstPart();
             this.executesCounterAttackSecondPart();
             this.executesCounterAttackThirdPart();
@@ -148,8 +159,6 @@ class Endboss extends MovableObject {
     executesCounterAttackFirstPart() {
         if (this.counterAttackFirstPart) {
             this.x -= this.speed;
-            console.log('counterAttackFirstPart');
-            this.counterAttackSecondPart = true;
         }
     }
 
@@ -158,7 +167,6 @@ class Endboss extends MovableObject {
             this.counterAttackFirstPart = false;
             this.counterAttackSecondPart = true;
             this.x += this.speed;
-            console.log('counterAttackSecondPart')
         }
     }
 
@@ -166,7 +174,7 @@ class Endboss extends MovableObject {
         if (this.x >= this.middleX) {
             this.counterAttackFirstPart = false;
             this.counterAttackSecondPart = false;
-            console.log('counterAttackThirdPart')
+            console.log(this.counterAttackFirstPart);
             this.dribbleAnimation = true;
         }
     }
