@@ -38,10 +38,32 @@
     <img src="img/5_background/background_behind_canvas_2.jpg" class="bg-img">
     <div class="whole-body-upper-content">
         <h1 class="header">El Pollo Loco</h1>
-        <img src="img/5_background/startscreen.png" id="start-screen" class="startscreen-img">
-        <img src="img/5_background/game-over-screen.png" class="end-screen d-none" id="end-screen">
+        <div class="hud">
+            <div class="controls-div">
+                <div class="controls-left">
+                    <button></button>
+                    <button></button>
+                </div>
+                <div class="controls-right">
+                    <button></button>
+                    <button></button>
+                </div>
+            </div>
+            <img src="img/5_background/startscreen.png" id="start-screen" class="startscreen-img">
+            <img src="img/5_background/game-over-screen.png" class="end-screen d-none" id="end-screen">
+            <canvas id="canvas" height="480" width="720" class="canvas-1"></canvas>
+            <div class="controls-div">
+                <div class="controls-left">
+                    <button></button>
+                    <button></button>
+                </div>
+                <div class="controls-right">
+                    <button></button>
+                    <button></button>
+                </div>
+            </div>
+        </div>
         <button class="btn" onclick="startGame()" id="btn">Start Game</button>
-        <canvas id="canvas" height="480" width="720" class="canvas-1"></canvas>
         <div class="all-info-keys">
             <div class="single-info-key">
                 <img src="img/5_background/paper-bg-2.png" class="single-key-img-bg">

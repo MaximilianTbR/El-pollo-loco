@@ -118,6 +118,13 @@ class Endboss extends MovableObject {
         }
     }
 
+    checksDribbleAnimation() {
+        if (world.character.x >= 1310 && world.character.x < 1600 && this.dribbleAnimation) {
+            this.playAnimation(this.IMAGES_WALKING);
+            this.executesDribbleAnimation();
+        }
+    }
+
     executesDribbleAnimation() {
         this.dribbleAnimationPartOne();
         this.dribbleAnimationPartTwo();
@@ -142,6 +149,7 @@ class Endboss extends MovableObject {
             }
         }
     }
+
 
     checksCounterAttack() {
         if (world.character.x > 1600 || this.EndbossisHurt()) {
@@ -174,8 +182,8 @@ class Endboss extends MovableObject {
         if (this.x >= this.middleX) {
             this.counterAttackFirstPart = false;
             this.counterAttackSecondPart = false;
-            console.log(this.counterAttackFirstPart);
             this.dribbleAnimation = true;
+            console.log(this.dribbleAnimation);
         }
     }
 

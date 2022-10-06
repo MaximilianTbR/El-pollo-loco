@@ -178,6 +178,13 @@ canvas {
     flex-direction: column;
 }
 
+.hud {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 @media only screen and (max-width: 920px) and (min-width: 720px) {
     .all-info-keys {
         display: none !important;
@@ -187,7 +194,26 @@ canvas {
     }
 }
 
-@media only screen and (max-width: 720px) and (min-width: 620px) {
+@media only screen and (max-width: 720px) {
+    body {
+        behavior: url(-ms-transform.htc);
+        transform: rotate(90deg);
+        /* Firefox */
+        -moz-transform: rotate(90deg);
+        /* Safari and Chrome */
+        -webkit-transform: rotate(90deg);
+        /* Opera */
+        -o-transform: rotate(45deg);
+        /* IE9 */
+        -ms-transform: rotate(90deg);
+        /* IE6,IE7 */
+        filter: progid: DXImageTransform.Microsoft.Matrix(sizingMethod='auto expand', M11=0.7071067811865476, M12=-0.7071067811865475, M21=0.7071067811865475, M22=0.7071067811865476);
+        /* IE8 */
+        -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(SizingMethod='auto expand', M11=0.7071067811865476, M12=-0.7071067811865475, M21=0.7071067811865475, M22=0.7071067811865476)";
+    }
+    .bg-img {
+        width: fit-content !important;
+    }
     canvas {
         width: 100%;
         object-fit: contain;
@@ -233,20 +259,14 @@ canvas {
     }
 }
 
-@media only screen and (max-width: 620px) {
-    .canvas-2 {
-        margin-bottom: 20px;
-    }
-    .whole.whole-body-upper-content {
-        height: 545px !important;
+@media only screen and (max-width: 550px) {
+    .header {
+        display: none !important;
     }
 }
 
-@media only screen and (max-height: 480px) {
-    canvas {
-        height: 100vh;
-    }
-    .canvas-1 .canvas-2 {
-        height: 100vh;
+@media only screen and (max-width: 380px) {
+    .header {
+        display: none !important;
     }
 }
