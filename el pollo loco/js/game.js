@@ -7,6 +7,7 @@ function init() {
     initLevel();
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
+    addEventListeners();
     backgroundMusic.play();
 }
 
@@ -42,6 +43,9 @@ document.addEventListener('keydown', (e) => {
     if (e.keyCode == 82) {
         keyboard.R = true;
     }
+    if (e.keyCode == 109) {
+        keyboard.M = true;
+    }
 });
 
 document.addEventListener('keyup', (e) => {
@@ -66,64 +70,74 @@ document.addEventListener('keyup', (e) => {
     if (e.keyCode == 82) {
         keyboard.R = false;
     }
+    if (e.keyCode == 109) {
+        keyboard.M = true;
+    }
 });
 
-/*document.getElementById('btnMoveLeft').addEventListener('touchstart', (e) => {
-    e.preventDefault();
-    keyboard.LEFT = true;
-});
+function addEventListeners() {
+    document.getElementById('btnMoveLeft').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.LEFT = true;
+    });
 
-document.getElementById('btnMoveLeft').addEventListener('touchend', (e) => {
-    e.preventDefault();
-    keyboard.LEFT = false;
-});
-*/
+    document.getElementById('btnMoveLeft').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.LEFT = false;
+    });
 
-document.getElementById('btnMoveRight').addEventListener('touchstart', function(event) {
-    event.preventDefault();
-    keyboard.RIGHT = true;
-});
-/*
-var button = document.getElementById("button");
-button.addEventListener("click", function(event) {
-    alert(event.target);
-});
 
-document.getElementById('btnMoveRight').addEventListener('touchend', (e) => {
-    e.preventDefault();
-    keyboard.RIGHT = false;
-});
+    document.getElementById('btnMoveRight').addEventListener('touchstart', function(event) {
+        event.preventDefault();
+        keyboard.RIGHT = true;
+    });
 
-document.getElementById('btnJump').addEventListener('touchstart', (e) => {
-    e.preventDefault();
-    keyboard.UP = true;
-});
+    document.getElementById('btnMoveRight').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.RIGHT = false;
+    });
 
-document.getElementById('btnJump').addEventListener('touchend', (e) => {
-    e.preventDefault();
-    keyboard.UP = false;
-});
+    document.getElementById('btnJump').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.UP = true;
+    });
 
-document.getElementById('btnThrowBottle').addEventListener('touchstart', (e) => {
-    e.preventDefault();
-    keyboard.D = true;
-});
+    document.getElementById('btnJump').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.UP = false;
+    });
 
-document.getElementById('btnThrowBottle').addEventListener('touchend', (e) => {
-    e.preventDefault();
-    keyboard.D = false;
-});
+    document.getElementById('btnThrowBottle').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.D = true;
+    });
 
-document.getElementById('btnRestart').addEventListener('touchstart', (e) => {
-    e.preventDefault();
-    keyboard.R = true;
-});
+    document.getElementById('btnThrowBottle').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.D = false;
+    });
 
-document.getElementById('btnRestart').addEventListener('touchend', (e) => {
-    e.preventDefault();
-    keyboard.R = false;
-});
-*/
+    document.getElementById('btnRestart').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.R = true;
+    });
+
+    document.getElementById('btnRestart').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.R = false;
+    });
+
+    document.getElementById('btnMute').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.M = true;
+    });
+
+    document.getElementById('btnMute').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.M = false;
+    });
+}
+
 
 function openFullscreen() {
     let fullscreen = document.getElementById('canvas');
