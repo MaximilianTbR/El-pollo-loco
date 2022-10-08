@@ -50,7 +50,7 @@ body {
 .startscreen-img {
     width: 720px;
     height: fit-content;
-    padding-bottom: 10px;
+    /* padding-bottom: 10px; */
 }
 
 .btn {
@@ -59,7 +59,7 @@ body {
     height: 40px;
     position: absolute;
     z-index: 3;
-    top: 31.5rem;
+    top: 27.5rem;
     border-radius: 7px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-weight: 700;
@@ -246,6 +246,24 @@ canvas {
     box-shadow: 0px 0px 0px 4px #c2c6c9;
 }
 
+.help-menu-div {
+    width: 75vw;
+    height: 50vh;
+    background-image: url(img/5_background/bg-3.jpeg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    z-index: 8;
+}
+
+.all-info-keys-2 {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
 @media only screen and (max-width: 920px) and (min-width: 720px) {
     /*.all-info-keys {
         display: flex !important;
@@ -256,6 +274,20 @@ canvas {
     }*/
     .whole-body-upper-content {
         height: 640px !important;
+    }
+    .btn {
+        background-color: #8A5837;
+        width: 110px;
+        height: 40px;
+        position: absolute;
+        z-index: 3;
+        top: 28.9rem;
+        border-radius: 7px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-weight: 700;
+        border: none;
+        font-size: 16px;
+        color: white;
     }
 }
 
@@ -307,6 +339,7 @@ canvas {
         height: 40px;
         position: normal;
         z-index: 3;
+        top: 27.5rem;
         border-radius: 7px;
         font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
         font-weight: 700;
@@ -319,6 +352,57 @@ canvas {
 @media only screen and (max-width: 550px) {
     .btn {
         margin-top: -1rem;
+    }
+}
+
+@media only screen and (max-width: 470px) {
+    .btn {
+        background-color: #8A5837;
+        width: 110px;
+        height: 40px;
+        position: normal;
+        z-index: 3;
+        top: 26.7rem !important;
+        border-radius: 7px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-weight: 700;
+        border: none;
+        font-size: 16px;
+        color: white;
+    }
+}
+
+@media only screen and (max-width: 365px) {
+    .btn {
+        background-color: #8A5837;
+        width: 110px;
+        height: 40px;
+        position: normal;
+        z-index: 3;
+        top: 25.7rem !important;
+        border-radius: 7px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-weight: 700;
+        border: none;
+        font-size: 16px;
+        color: white;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .btn {
+        background-color: #8A5837;
+        width: 110px;
+        height: 40px;
+        position: normal;
+        z-index: 3;
+        top: 27.7rem;
+        border-radius: 7px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-weight: 700;
+        border: none;
+        font-size: 16px;
+        color: white;
     }
 }
 
@@ -372,15 +456,16 @@ canvas {
     }
     .btn {
         background-color: #8A5837;
-        width: 110px;
-        height: 40px;
-        position: normal;
+        width: 150px;
+        height: 57px;
+        position: absolute;
         z-index: 3;
+        top: 27rem;
         border-radius: 7px;
         font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
         font-weight: 700;
         border: none;
-        font-size: 16px;
+        font-size: 26px;
         color: white;
     }
     .hud {
@@ -390,10 +475,10 @@ canvas {
         flex-direction: row !important;
     }
     .lower-controls-div {
-        margin-left: 100px;
+        margin-left: 80px;
     }
     .upper-controls-div {
-        margin-right: 100px;
+        margin-right: 70px;
     }
     .controls-left {
         flex-direction: column-reverse !important;
@@ -432,7 +517,7 @@ canvas {
     .whole-body-upper-content {
         padding-left: 0px !important;
         padding-right: 0px !important;
-        width: 800px;
+        width: 720px;
         height: fit-content;
         display: flex;
         justify-content: center;

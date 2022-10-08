@@ -138,6 +138,18 @@ function addEventListeners() {
     });
 }
 
+function reloadPage() {
+    location.reload();
+}
+
+function openHelpMenu() {
+    document.getElementById('help-menu-div').classList.remove('d-none');
+}
+
+function closeHelpMenu() {
+    document.getElementById('help-menu-div').classList.add('d-none');
+}
+
 
 function openFullscreen() {
     let fullscreen = document.getElementById('canvas');
