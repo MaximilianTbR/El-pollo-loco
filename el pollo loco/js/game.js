@@ -2,6 +2,7 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 let backgroundMusic = new Audio('audio/background-music.mp3');
+let lastMove = 0;
 
 function init() {
     initLevel();
@@ -45,6 +46,7 @@ document.addEventListener('keydown', (e) => {
     }
     if (e.keyCode == 109) {
         keyboard.M = true;
+        mutePage();
     }
 });
 
@@ -71,8 +73,9 @@ document.addEventListener('keyup', (e) => {
         keyboard.R = false;
     }
     if (e.keyCode == 109) {
-        keyboard.M = true;
+        keyboard.M = false;
     }
+    lastMove = new Date().getTime() / 1000;
 });
 
 function addEventListeners() {
@@ -136,6 +139,16 @@ function addEventListeners() {
         e.preventDefault();
         keyboard.M = false;
     });
+}
+
+function muteMe(elem) {
+    elem.muted = true;
+    elem.pause();
+}
+
+// Try to mute all video and audio elements on the page
+function mutePage() {
+    document.querySelectorAll("video, audio").forEach(elem => muteMe(elem));
 }
 
 function reloadPage() {

@@ -183,7 +183,6 @@ class Endboss extends MovableObject {
             this.counterAttackFirstPart = false;
             this.counterAttackSecondPart = false;
             this.dribbleAnimation = true;
-            console.log(this.dribbleAnimation);
         }
     }
 
