@@ -1,5 +1,4 @@
 class DrawableObject {
-
     img;
     imageCache = {};
     currentImage = 0;
@@ -16,11 +15,6 @@ class DrawableObject {
     draw(ctx) {
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
-
-    /**
-     * 
-     * @param {Array} arr - ['img/image1.png', 'img/image2.png', ...];
-     */
 
     loadImages(arr) {
         arr.forEach((path) => {

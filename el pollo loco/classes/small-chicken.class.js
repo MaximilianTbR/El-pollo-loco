@@ -32,31 +32,11 @@ class smallChicken extends MovableObject {
         this.speed = 0.15 + Math.random() * 0.25;
     }
 
-    playAnimationBot() {
-        console.log('function works for small chicken');
-        let myInterval = setInterval(() => {
-            this.playAnimation(this.IMAGES_DEAD);
-        }, 200)
-        setTimeout(clearInterval(myInterval), 3000);
+    animate() {
+        this.smallChickenMovesLeft();
     }
 
-    animate() {
-        /*
-        if (this.dead == false) {
-            setInterval(() => {
-                this.playAnimation(this.IMAGES_WALKING)
-            }, 200)
-            this.myInterval = setInterval(() => {
-                this.moveLeft()
-            }, 40)
-        } else {
-            console.log(this.dead)
-            setInterval(() => {
-                this.playAnimation(this.IMAGES_DEAD)
-            }, 200)
-            clearInterval(this.myInterval);
-        }
-        */
+    smallChickenMovesLeft() {
         setInterval(() => {
             if (!this.dead) {
                 this.playAnimation(this.IMAGES_WALKING)

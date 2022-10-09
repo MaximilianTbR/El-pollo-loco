@@ -36,21 +36,18 @@ class Chicken extends MovableObject {
         this.chickenRegularSound.play();
     }
 
-    playAnimationBot() {
-        let myInterval = setInterval(() => {
-            this.playAnimation(this.IMAGES_DEAD);
-        }, 200)
-        setTimeout(clearInterval(myInterval), 3000);
-    }
-
     animate() {
         setInterval(() => {
             if (!this.dead) {
-                this.playAnimation(this.IMAGES_WALKING)
-                this.moveLeft()
+                this.chickenMovesLeft();
             } else {
                 this.playAnimation(this.IMAGES_DEAD);
             }
         }, 1000 / 40);
+    }
+
+    chickenMovesLeft() {
+        this.playAnimation(this.IMAGES_WALKING)
+        this.moveLeft();
     }
 }

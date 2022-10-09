@@ -24,6 +24,7 @@ class World {
     gameOverScreen = new GameOverScreen();
     gameWonScreen = new GameWonScreen();
     endbossMode = false;
+    index;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -109,29 +110,17 @@ class World {
         this.ctx.restore();
     }
 
+    characterEntersEndbossArea() {
+        return this.character.x >= 1310;
+    }
+
     checkCollisions() {
         this.characterCollidesWithEnemy();
         this.characterCollidesWithEndboss();
         this.characterJumpsOnEnemy();
         this.bottleIsCollidingWithEnemy();
-        this.level.thrownObjects.forEach((bottle) => {
-            this.level.endboss.forEach((endboss) => {
-                if (bottle.isColliding(endboss) && this.endboss[0].energy > 5) {
-                    this.endboss[0].isHitted();
-                    this.endbossbar.setPercentage(this.endboss[0].energy);
-                }
-                if (bottle.isColliding(endboss) && this.endboss[0].energy == 0) {
-                    let index = this.level.endboss.indexOf(endboss);
-                    this.endboss[index].dead = true;
-                    this.gameWon = true;
-                    setTimeout(() => {
-                        this.killEndboss(index);
-                    }, 1000)
-                }
-            })
-        })
-
-        if (this.character.x >= 1310) {
+        this.bottleIsCollidingWithEndboss();
+        if (this.characterEntersEndbossArea()) {
             this.endbossMode = true;
         }
     }
@@ -157,13 +146,21 @@ class World {
     characterJumpsOnEnemy() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy) && this.character.isAboveGround()) {
-                let index = this.level.enemies.indexOf(enemy);
-                this.enemies[index].dead = true;
-                setTimeout(() => {
-                    this.killChicken(index);
-                }, 1000)
+                this.getsIndexOfChicken(enemy);
+                this.enemies[this.index].dead = true;
+                this.chickenDies(this.index);
             }
         });
+    }
+
+    getsIndexOfChicken(enemy) {
+        return this.index = this.level.enemies.indexOf(enemy);
+    }
+
+    chickenDies(index) {
+        setTimeout(() => {
+            this.killChicken(index);
+        }, 1000);
     }
 
     bottleIsCollidingWithEnemy() {
@@ -172,10 +169,32 @@ class World {
                 if (bottle.isColliding(enemy)) {
                     let index = this.level.enemies.indexOf(enemy);
                     this.enemies[index].dead = true;
+                    this.endbossIsDead(index);
+                }
+            })
+        })
+    }
+
+    endbossIsDead(index) {
+        setTimeout(() => {
+            this.killEndboss(index);
+        }, 1000);
+    }
+
+    bottleIsCollidingWithEndboss() {
+        this.level.thrownObjects.forEach((bottle) => {
+            this.level.endboss.forEach((endboss) => {
+                if (bottle.isColliding(endboss) && this.endboss[0].energy > 5) {
+                    this.endboss[0].isHitted();
+                    this.endbossbar.setPercentage(this.endboss[0].energy);
+                }
+                if (bottle.isColliding(endboss) && this.endboss[0].energy == 0) {
+                    let index = this.level.endboss.indexOf(endboss);
+                    this.endboss[index].dead = true;
+                    this.gameWon = true;
                     setTimeout(() => {
                         this.killEndboss(index);
                     }, 1000)
-
                 }
             })
         })
