@@ -23,16 +23,18 @@ class ThrowableObject extends MovableObject {
 
 
     world = World;
+    bottleDirection;
 
     groundPosition = 350;
 
-    constructor(x, y) {
+    constructor(x, y, direction) {
         super().loadImage('img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png');
         this.loadImages(this.IMAGES_ROTATION);
         this.loadImages(this.IMAGES_ON_GROUND);
         this.loadImages(this.IMAGES_SPLASH);
         this.x = x;
         this.y = y;
+        this.bottleDirection = direction;
         this.height = 60;
         this.width = 50;
         this.speedY = 25;
@@ -49,7 +51,7 @@ class ThrowableObject extends MovableObject {
     }
 
     moveObject() {
-        if (world.character.otherDirection) {
+        if (this.bottleDirection) {
             this.moveLeft();
         } else {
             this.moveRightBottle()
