@@ -7,6 +7,7 @@ class Keyboard {
     D = false;
     R = false;
     M = false;
+    lastMove = 0;
 
     constructor() {
 

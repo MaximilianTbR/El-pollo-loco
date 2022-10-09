@@ -122,13 +122,12 @@ class Character extends MovableObject {
         setInterval(() => {
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
-                //this.playAnimation(this.IMAGES)
             }
             if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
             } else if (this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMPING);
-            } else if (this.isIdle) {
+            } else if (this.isIdle()) {
                 this.playAnimation(this.IMAGES_LONG_IDLE);
             } else {
                 if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
@@ -136,5 +135,10 @@ class Character extends MovableObject {
                 }
             }
         }, 100);
+    }
+
+    isIdle() {
+        let timePassed = (new Date().getTime() / 1000) - this.world.keyboard.lastMove;
+        return timePassed > 2;
     }
 }

@@ -68,9 +68,4 @@ class MovableObject extends DrawableObject {
     jump() {
         this.speedY = 30;
     }
-
-    isIdle() {
-        let timePassed = new Date().getTime() - this.world.keyboard.lastMove;
-        return timePassed > 5000;
-    }
 }

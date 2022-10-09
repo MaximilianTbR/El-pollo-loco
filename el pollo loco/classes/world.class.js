@@ -40,13 +40,10 @@ class World {
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
         this.ctx.translate(this.camera_x, 0);
-
         this.addObjectsToMap(this.level.backgroundObjects);
         this.addToMap(this.character);
         this.addObjectsToMap(this.thrownObjects);
-
         this.ctx.translate(-this.camera_x, 0);
         this.addToMap(this.statusBar);
         this.addToMap(this.moneyBar);
@@ -57,19 +54,17 @@ class World {
             }
         })
         this.ctx.translate(this.camera_x, 0);
-
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.endboss);
         this.addObjectsToMap(this.level.collectableBottles);
         this.addObjectsToMap(this.level.collectableCoins);
         this.ctx.translate(-this.camera_x, 0);
-        if (this.gameOver == true) {
+        if (this.gameOver) {
             this.addToMap(this.gameOverScreen);
-        } else if (this.gameWon == true) {
+        } else if (this.gameWon) {
             this.addToMap(this.gameWonScreen);
         }
-        // draw() will be executed over and over again
         let self = this;
         requestAnimationFrame(function() {
             self.draw();
@@ -86,9 +81,7 @@ class World {
         if (mo.otherDirection) {
             this.flipImage(mo);
         }
-
         mo.draw(this.ctx);
-
         if (mo.otherDirection) {
             this.flipImage(mo);
         }
