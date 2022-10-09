@@ -92,6 +92,4 @@ class ThrowableObject extends MovableObject {
     spliceIndex(index) {
         world.level.thrownObjects.splice(index, 1);
     }
-
-    // clean code!!!
 }
