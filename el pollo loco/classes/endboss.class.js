@@ -21,6 +21,7 @@ class Endboss extends MovableObject {
     counterAttackFirstPart = true;
     counterAttackSecondPart = false;
     Interval2IsActive = false;
+    i;
 
 
     IMAGES_SPAWNING = [
@@ -70,38 +71,63 @@ class Endboss extends MovableObject {
 
     constructor() {
         super().loadImage(this.IMAGES_WALKING[0]);
-        this.loadImages(this.IMAGES_SPAWNING);
-        this.loadImages(this.IMAGES_WALKING);
-        this.loadImages(this.IMAGES_ATTACK);
-        this.loadImages(this.IMAGES_HURT);
-        this.loadImages(this.IMAGES_DEAD);
+        this.loadsAllImages();
         this.x = 2000;
         this.speed = 20;
         this.animate();
         this.startEndFight();
     }
 
-    animate() {
-        let i = 0;
-        setInterval(() => {
-            if (i < 10) {
-                this.playAnimation(this.IMAGES_WALKING);
-            } else {
-                this.playAnimation(this.IMAGES_SPAWNING)
-            }
-            i++;
+    loadsAllImages() {
+        this.loadImages(this.IMAGES_SPAWNING);
+        this.loadImages(this.IMAGES_WALKING);
+        this.loadImages(this.IMAGES_ATTACK);
+        this.loadImages(this.IMAGES_HURT);
+        this.loadImages(this.IMAGES_DEAD);
+    }
 
-            if (world.character.x > 1310 && !this.hadFirstContact) {
-                i = 0;
-                this.hadFirstContact = true;
-                this.endbossIsIn = true;
-            }
-            if (this.dead) {
-                this.endbossIsIn = false;
-                this.hadFirstContact = false;
-                this.playAnimation(this.IMAGES_DEAD);
-            }
+    animate() {
+        this.runsAnimations();
+        this.startsEndbossMode();
+    }
+
+    runsAnimations() {
+        this.i = 0;
+        setInterval(() => {
+            this.choosesRightImages();
+        }, 200);
+    }
+
+    choosesRightImages() {
+        if (this.i < 10) {
+            this.playAnimation(this.IMAGES_WALKING);
+        } else {
+            this.playAnimation(this.IMAGES_SPAWNING)
+        }
+        this.i++;
+    }
+
+    startsEndbossMode() {
+        setInterval(() => {
+            this.endbossFightBegins();
+            this.endbossIsDead();
         }, 200)
+    }
+
+    endbossFightBegins() {
+        if (world.character.x > 1310 && !this.hadFirstContact) {
+            this.i = 0;
+            this.hadFirstContact = true;
+            this.endbossIsIn = true;
+        }
+    }
+
+    endbossIsDead() {
+        if (this.dead) {
+            this.endbossIsIn = false;
+            this.hadFirstContact = false;
+            this.playAnimation(this.IMAGES_DEAD);
+        }
     }
 
     startEndFight() {

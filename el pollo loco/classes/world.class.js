@@ -184,20 +184,28 @@ class World {
     bottleIsCollidingWithEndboss() {
         this.level.thrownObjects.forEach((bottle) => {
             this.level.endboss.forEach((endboss) => {
-                if (bottle.isColliding(endboss) && this.endboss[0].energy > 5) {
-                    this.endboss[0].isHitted();
-                    this.endbossbar.setPercentage(this.endboss[0].energy);
-                }
-                if (bottle.isColliding(endboss) && this.endboss[0].energy == 0) {
-                    let index = this.level.endboss.indexOf(endboss);
-                    this.endboss[index].dead = true;
-                    this.gameWon = true;
-                    setTimeout(() => {
-                        this.killEndboss(index);
-                    }, 1000)
-                }
+                this.bottleHitsEndbossNormally(bottle, endboss);
+                this.bottleKillsEndboss(bottle, endboss);
             })
         })
+    }
+
+    bottleHitsEndbossNormally(bottle, endboss) {
+        if (bottle.isColliding(endboss) && this.endboss[0].energy > 5) {
+            this.endboss[0].isHitted();
+            this.endbossbar.setPercentage(this.endboss[0].energy);
+        }
+    }
+
+    bottleKillsEndboss(bottle, endboss) {
+        if (bottle.isColliding(endboss) && this.endboss[0].energy == 0) {
+            let index = this.level.endboss.indexOf(endboss);
+            this.endboss[index].dead = true;
+            this.gameWon = true;
+            setTimeout(() => {
+                this.killEndboss(index);
+            }, 1000)
+        }
     }
 
     killChicken(index) {
@@ -216,31 +224,59 @@ class World {
 
     checkCollectingBottles() {
         this.level.collectableBottles.forEach((collectableObject) => {
-            if (this.character.isColliding(collectableObject)) {
-                this.character.collectedBottles += 1;
-                this.bottleBar.setPercentage(this.character.collectedBottles);
-                let index = this.level.collectableBottles.indexOf(collectableObject);
-                this.level.collectableBottles.splice(index, 1);
-            }
+            this.characterCollectsBottle(collectableObject);
         })
+    }
+
+    characterCollectsBottle(collectableObject) {
+        if (this.character.isColliding(collectableObject)) {
+            this.characterGetsOneMoreBottle();
+            this.bottleBar.setPercentage(this.character.collectedBottles);
+            this.bottleDisappearsFromGround(collectableObject);
+        }
+    }
+
+    characterGetsOneMoreBottle() {
+        return this.character.collectedBottles += 1;
+    }
+
+    bottleDisappearsFromGround(collectableObject) {
+        let index = this.level.collectableBottles.indexOf(collectableObject);
+        this.level.collectableBottles.splice(index, 1);
     }
 
     checkCollectingCoins() {
         this.level.collectableCoins.forEach((collectableObject) => {
             if (this.character.isColliding(collectableObject)) {
-                this.character.collectedCoins += 1;
+                this.characterGetsOneMoreCoin()
                 this.moneyBar.setPercentage(this.character.collectedCoins);
-                let index = this.level.collectableCoins.indexOf(collectableObject);
-                this.level.collectableCoins.splice(index, 1);
+                this.coinDisappearsFromGround(collectableObject);
             }
         })
     }
 
+    characterGetsOneMoreCoin() {
+        return this.character.collectedCoins += 1;
+    }
+
+    coinDisappearsFromGround(collectableObject) {
+        let index = this.level.collectableCoins.indexOf(collectableObject);
+        this.level.collectableCoins.splice(index, 1);
+    }
+
     checkThrowObjects() {
         if (this.keyboard.D && this.character.collectedBottles > 0) {
-            this.character.collectedBottles -= 1;
+            this.characterLoosesOneBottle();
             this.bottleBar.setPercentage(this.character.bottle);
-            this.level.thrownObjects.push(new ThrowableObject(this.character.x + 100, this.character.y + 100, this.character.otherDirection));
+            this.newBottleIsThrown();
         }
+    }
+
+    characterLoosesOneBottle() {
+        return this.character.collectedBottles -= 1;
+    }
+
+    newBottleIsThrown() {
+        this.level.thrownObjects.push(new ThrowableObject(this.character.x + 100, this.character.y + 100, this.character.otherDirection));
     }
 }

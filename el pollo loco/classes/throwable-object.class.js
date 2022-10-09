@@ -29,9 +29,7 @@ class ThrowableObject extends MovableObject {
 
     constructor(x, y, direction) {
         super().loadImage('img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png');
-        this.loadImages(this.IMAGES_ROTATION);
-        this.loadImages(this.IMAGES_ON_GROUND);
-        this.loadImages(this.IMAGES_SPLASH);
+        this.loadAllImages();
         this.x = x;
         this.y = y;
         this.bottleDirection = direction;
@@ -40,6 +38,12 @@ class ThrowableObject extends MovableObject {
         this.speedY = 25;
         this.speed = 10;
         this.throw();
+    }
+
+    loadAllImages() {
+        this.loadImages(this.IMAGES_ROTATION);
+        this.loadImages(this.IMAGES_ON_GROUND);
+        this.loadImages(this.IMAGES_SPLASH);
     }
 
     throw () {
@@ -88,4 +92,6 @@ class ThrowableObject extends MovableObject {
     spliceIndex(index) {
         world.level.thrownObjects.splice(index, 1);
     }
+
+    // clean code!!!
 }
