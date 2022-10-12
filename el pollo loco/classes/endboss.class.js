@@ -20,6 +20,7 @@ class Endboss extends MovableObject {
     dribbleAnimation = true;
     counterAttackFirstPart = true;
     counterAttackSecondPart = false;
+    BL = false;
     Interval2IsActive = false;
     i;
 
@@ -129,6 +130,7 @@ class Endboss extends MovableObject {
         if (this.dead) {
             this.endbossIsIn = false;
             this.hadFirstContact = false;
+            this.BL = true;
             this.playAnimation(this.IMAGES_DEAD);
         }
     }
@@ -138,11 +140,10 @@ class Endboss extends MovableObject {
             this.checksDribbleAnimation();
             this.checksCounterAttack();
             if (world.character.energy == 0) {
-                console.log('enemyrr is dead2');
                 clearInterval(this.myInterval1);
             }
             if (this.energy <= 0) {
-                console.log('endboss is dead');
+                this.BL = true;
                 clearInterval(this.myInterval1);
             }
         }, 50);

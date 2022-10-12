@@ -79,6 +79,7 @@ class World {
             this.checkCollectingBottles();
             this.checkCollectingCoins();
             this.checkThrowObjects();
+            this.checkIfEndbossIsDead();
         }, 200)
     }
 
@@ -278,5 +279,12 @@ class World {
 
     newBottleIsThrown() {
         this.level.thrownObjects.push(new ThrowableObject(this.character.x + 100, this.character.y + 100, this.character.otherDirection));
+    }
+
+    checkIfEndbossIsDead() {
+        console.log('works?')
+        if (this.endboss[0].BL == true) {
+            this.character.BL2 = true;
+        }
     }
 }

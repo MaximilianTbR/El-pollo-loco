@@ -65,7 +65,8 @@ class Character extends MovableObject {
     walking_sound = new Audio('audio/running.mp3');
     jumping_sound = new Audio('audio/jump.mp3');
     throwing_sound = new Audio('audio/throwing.mp3');
-    hurt_sound = new Audio('audio/')
+    hurt_sound = new Audio('audio/');
+    BL2 = false;
 
     character = 0;
     collectedBottles = 0;
@@ -175,6 +176,9 @@ class Character extends MovableObject {
         if (this.energy == 0) {
             clearInterval(myInterval);
         }
+        if (this.BL2 == true) {
+            clearInterval(myInterval);
+        }
     }
 
     runCharacterAnimations() {
@@ -219,7 +223,7 @@ class Character extends MovableObject {
     }
 
     checksIfCharacterIsDeadForAnimations(myAnimationInterval) {
-        if (this.energy == 0) {
+        if (this.energy == 0 || this.BL2 == true) {
             clearInterval(myAnimationInterval);
         }
     }
