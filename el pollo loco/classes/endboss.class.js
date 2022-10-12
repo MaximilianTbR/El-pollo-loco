@@ -93,8 +93,11 @@ class Endboss extends MovableObject {
 
     runsAnimations() {
         this.i = 0;
-        setInterval(() => {
+        let myInterval = setInterval(() => {
             this.choosesRightImages();
+            if (world.character.energy == 0) {
+                clearInterval(myInterval);
+            }
         }, 200);
     }
 
@@ -134,6 +137,14 @@ class Endboss extends MovableObject {
         this.myInterval1 = setInterval(() => {
             this.checksDribbleAnimation();
             this.checksCounterAttack();
+            if (world.character.energy == 0) {
+                console.log('enemyrr is dead2');
+                clearInterval(this.myInterval1);
+            }
+            if (this.energy <= 0) {
+                console.log('endboss is dead');
+                clearInterval(this.myInterval1);
+            }
         }, 50);
     }
 

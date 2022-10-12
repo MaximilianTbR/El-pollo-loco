@@ -9,7 +9,6 @@ function addContact(fN, lN) { // wichtig: fN & lN hängen in keinster Weise mit 
     contacts.push({
         myContact
     })
-    console.log('Test');
 }
 
 addContact('Junus', 'Ergin');

@@ -93,20 +93,27 @@ class Character extends MovableObject {
     }
 
     animate() {
+        this.runsKeyboardShortcuts();
         this.runCharacterSkills();
         this.runCharacterAnimations();
     }
 
-    runCharacterSkills() {
+    runsKeyboardShortcuts() {
         setInterval(() => {
+            this.siteReloads();
+        }, 1000 / 60)
+    }
+
+    runCharacterSkills() {
+        let myInterval = setInterval(() => {
             this.walking_sound.pause();
             this.characterMovesRight();
             this.characterMovesLeft();
             this.characterMovesInEndbossMode();
             this.characterJumps();
             this.characterThrowsBottle();
-            this.siteReloads();
             this.adjustsCamera();
+            this.checksIfCharacterIsDead(myInterval);
         }, 1000 / 60)
     }
 
@@ -164,13 +171,20 @@ class Character extends MovableObject {
         return timePassed > 2;
     }
 
+    checksIfCharacterIsDead(myInterval) {
+        if (this.energy == 0) {
+            clearInterval(myInterval);
+        }
+    }
+
     runCharacterAnimations() {
-        setInterval(() => {
+        let myAnimationInterval = setInterval(() => {
             this.deadAnimation();
             this.hurtAnimation();
             this.jumpAnimation();
             this.idleAnimation();
             this.walkingAnimation();
+            this.checksIfCharacterIsDeadForAnimations(myAnimationInterval);
         }, 100);
     }
 
@@ -201,6 +215,12 @@ class Character extends MovableObject {
     walkingAnimation() {
         if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
             this.playAnimation(this.IMAGES_WALKING);
+        }
+    }
+
+    checksIfCharacterIsDeadForAnimations(myAnimationInterval) {
+        if (this.energy == 0) {
+            clearInterval(myAnimationInterval);
         }
     }
 }

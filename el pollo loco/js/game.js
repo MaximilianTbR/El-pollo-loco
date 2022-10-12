@@ -14,7 +14,6 @@ function init() {
 
 function startGame() {
     document.getElementById('start-screen').classList.add('d-none');
-    console.log()
     document.getElementById('canvas').classList.add('start-screen-shadow');
     document.getElementById('btn').classList.add('d-none');
     document.getElementById('canvas').classList.remove('canvas-1');
