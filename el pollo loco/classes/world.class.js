@@ -73,13 +73,13 @@ class World {
     }
 
     run() { // function, that contains essential functions for the game which runs nearly the whole time
-        setInterval(() => {
+        let myInterval = setInterval(() => {
             this.checkCollisions();
             this.checkHealth();
             this.checkCollectingBottles();
             this.checkCollectingCoins();
             this.checkThrowObjects();
-            this.checkIfEndbossIsDead();
+            this.checkIfEndbossIsDead(myInterval);
         }, 200)
     }
 
@@ -128,7 +128,7 @@ class World {
 
     characterCollidesWithEnemy() {
         this.level.enemies.forEach((enemy) => {
-            if (this.character.isColliding(enemy)) {
+            if (this.character.isColliding(enemy) && enemy.isDead == false) {
                 this.character.hit();
                 this.statusBar.setPercentage(this.character.energy);
             }
@@ -148,6 +148,7 @@ class World {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy) && this.character.isAboveGround()) {
                 this.getsIndexOfChicken(enemy);
+                this.enemies[this.index].isDead = true;
                 this.enemies[this.index].dead = true;
                 this.chickenDies(this.index);
             }
@@ -169,7 +170,8 @@ class World {
             this.level.enemies.forEach((enemy) => {
                 if (bottle.isColliding(enemy)) {
                     let index = this.level.enemies.indexOf(enemy);
-                    this.enemies[index].dead = true;
+                    this.enemies[index].isDead = true;
+                    this.enemies[this.index].dead = true;
                     this.endbossIsDead(index);
                 }
             })
@@ -281,10 +283,10 @@ class World {
         this.level.thrownObjects.push(new ThrowableObject(this.character.x + 100, this.character.y + 100, this.character.otherDirection));
     }
 
-    checkIfEndbossIsDead() {
-        console.log('works?')
+    checkIfEndbossIsDead(myInterval) {
         if (this.endboss[0].BL == true) {
             this.character.BL2 = true;
+            clearInterval(myInterval);
         }
     }
 }

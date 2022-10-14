@@ -6,6 +6,7 @@ class Chicken extends MovableObject {
     myInterval;
     dead = false;
     world = this.world;
+    isDead = false;
 
     IMAGES_WALKING = [
         'img/3_enemies_chicken/chicken_normal/1_walk/1_w.png',
