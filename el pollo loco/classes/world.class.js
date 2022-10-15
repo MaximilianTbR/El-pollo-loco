@@ -280,7 +280,8 @@ class World {
     }
 
     newBottleIsThrown() {
-        this.level.thrownObjects.push(new ThrowableObject(this.character.x + 100, this.character.y + 100, this.character.otherDirection));
+        const newBottle = new ThrowableObject(this.character.x + 100, this.character.y + 100, this.character.otherDirection);
+        this.level.thrownObjects.push(newBottle);
     }
 
     checkIfEndbossIsDead(myInterval) {

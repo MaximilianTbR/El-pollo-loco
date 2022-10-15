@@ -7,6 +7,12 @@ class Chicken extends MovableObject {
     dead = false;
     world = this.world;
     isDead = false;
+    offset = {
+        top: 30,
+        left: 40,
+        right: 30,
+        bottom: 30
+    }
 
     IMAGES_WALKING = [
         'img/3_enemies_chicken/chicken_normal/1_walk/1_w.png',
@@ -48,7 +54,7 @@ class Chicken extends MovableObject {
             /*if (this.character.energy == 0) {
                 clearInterval(myInterval);
             }*/
-        }, 1000 / 40);
+        }, 100);
     }
 
     chickenMovesLeft() {

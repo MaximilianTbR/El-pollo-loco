@@ -23,6 +23,12 @@ class Endboss extends MovableObject {
     BL = false;
     Interval2IsActive = false;
     i;
+    offset = {
+        top: 40,
+        left: 40,
+        right: 30,
+        bottom: 30
+    }
 
 
     IMAGES_SPAWNING = [

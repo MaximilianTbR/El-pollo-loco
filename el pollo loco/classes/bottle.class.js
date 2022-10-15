@@ -3,6 +3,12 @@ class Bottle extends DrawableObject {
     y = 360;
     width = 80;
     height = 60;
+    offset = {
+        top: 40,
+        left: 40,
+        right: 30,
+        bottom: 30
+    }
 
     IMAGES_COLLECTABLE = [
         'img/6_salsa_bottle/1_salsa_bottle_on_ground.png',

@@ -4,6 +4,12 @@ class smallChicken extends MovableObject {
     height = 60;
     myInterval;
     isDead = false;
+    offset = {
+        top: 30,
+        left: 40,
+        right: 30,
+        bottom: 30
+    }
 
     IMAGES_WALKING = [
         'img/3_enemies_chicken/chicken_small/1_walk/1_w.png',
@@ -44,6 +50,6 @@ class smallChicken extends MovableObject {
             } else {
                 this.playAnimation(this.IMAGES_DEAD);
             }
-        }, 1000 / 40);
+        }, 100);
     }
 }
