@@ -5,10 +5,10 @@ class smallChicken extends MovableObject {
     myInterval;
     isDead = false;
     offset = {
-        top: 30,
-        left: 40,
-        right: 30,
-        bottom: 30
+        top: 50,
+        left: 50,
+        right: 50,
+        bottom: 50
     }
 
     IMAGES_WALKING = [

@@ -4,10 +4,10 @@ class Bottle extends DrawableObject {
     width = 80;
     height = 60;
     offset = {
-        top: 40,
-        left: 40,
-        right: 30,
-        bottom: 30
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0
     }
 
     IMAGES_COLLECTABLE = [

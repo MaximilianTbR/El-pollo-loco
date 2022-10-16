@@ -133,7 +133,7 @@ class Character extends MovableObject {
     }
 
     characterMovesLeft() {
-        if (this.world.keyboard.LEFT && this.x > 0 && this.world.endbossMode == false) {
+        if (this.world.keyboard.LEFT && this.x > 0 && !this.world.endbossMode) {
             this.otherDirection = true;
             this.moveLeft();
             this.walking_sound.play();
@@ -141,7 +141,7 @@ class Character extends MovableObject {
     }
 
     characterMovesInEndbossMode() {
-        if (this.world.keyboard.LEFT && this.x > 0 && this.world.endbossMode == true) {
+        if (this.world.keyboard.LEFT && this.x > 0 && this.world.endbossMode) {
             if (this.x > 1310) {
                 this.otherDirection = true;
                 this.moveLeft();
@@ -151,10 +151,14 @@ class Character extends MovableObject {
     }
 
     characterJumps() {
-        if (this.world.keyboard.UP && !this.isAboveGround() || this.world.keyboard.SPACE && !this.isAboveGround()) {
+        if (this.canJump()) {
             this.jump();
             this.jumping_sound.play();
         }
+    }
+
+    canJump() {
+        return this.world.keyboard.UP && !this.isAboveGround() || this.world.keyboard.SPACE && !this.isAboveGround()
     }
 
     characterThrowsBottle() {
