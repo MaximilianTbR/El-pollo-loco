@@ -121,8 +121,15 @@ canvas {
     cursor: pointer;
     position: absolute;
     z-index: 5;
-    bottom: 132px;
-    right: 62px;
+    bottom: 32.5rem;
+    right: 44px;
+    background-color: #DDCA95;
+    width: 68px;
+    height: 68px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
 }
 
 .expand-img {
@@ -204,6 +211,10 @@ canvas {
     justify-content: space-between;
     width: 80%;
     align-items: center;
+}
+
+.lower-controls-unset {
+    display: none;
 }
 
 .controls-left {
@@ -355,6 +366,13 @@ canvas {
     }
 }
 
+.lower-controls-div-smartphone {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    align-items: center;
+}
+
 @media only screen and (max-width: 550px) {
     .btn {
         margin-top: -1rem;
@@ -394,6 +412,9 @@ canvas {
         filter: progid: DXImageTransform.Microsoft.Matrix(sizingMethod='auto expand', M11=0.7071067811865476, M12=-0.7071067811865475, M21=0.7071067811865475, M22=0.7071067811865476);
         /* IE8 */
         -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(SizingMethod='auto expand', M11=0.7071067811865476, M12=-0.7071067811865475, M21=0.7071067811865475, M22=0.7071067811865476)";
+    }
+    .lower-controls-div-smartphone {
+        display: unset;
     }
 }
 
@@ -451,7 +472,9 @@ canvas {
         align-items: center;
     }
     .bg-img {
-        width: 100%;
+        width: auto;
+        height: auto;
+        object-fit: cover;
     }
     canvas {
         width: 100%;
@@ -475,6 +498,7 @@ canvas {
     .whole-body-upper-content {
         width: 100%;
         height: 620px;
+        background-color: unset;
     }
     .all-info-keys {
         display: none;
@@ -502,12 +526,6 @@ canvas {
         align-items: center !important;
         flex-direction: row !important;
     }
-    .lower-controls-div {
-        margin-left: 80px;
-    }
-    .upper-controls-div {
-        margin-right: 70px;
-    }
     .controls-left {
         flex-direction: column-reverse !important;
     }
@@ -516,8 +534,8 @@ canvas {
     }
     .cntrl-btn-1 {
         background-color: #8A5837;
-        width: 120px !important;
-        height: 120px !important;
+        max-width: 120px !important;
+        max-height: 120px !important;
         font-size: 35px;
         border-radius: 7px;
         font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -528,8 +546,8 @@ canvas {
     }
     .cntrl-btn-2 {
         background-color: #8A5837;
-        width: 120px !important;
-        height: 120px !important;
+        max-width: 120px !important;
+        max-height: 120px !important;
         font-size: 35px;
         border-radius: 7px;
         font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -556,5 +574,11 @@ canvas {
         background-image: none !important;
         background-position: center;
         box-shadow: none !important;
+    }
+}
+
+@media only screen and (max-height: 450px) {
+    .btn {
+        top: 18rem;
     }
 }
