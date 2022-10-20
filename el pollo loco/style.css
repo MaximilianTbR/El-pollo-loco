@@ -281,6 +281,20 @@ canvas {
     flex-wrap: wrap;
 }
 
+.responsive-warning {
+    display: none;
+    font-family: 'Horseboy Boots';
+    position: absolute;
+    z-index: 10;
+    font-size: 60px;
+    color: gold;
+    text-shadow: 2px 2px #ff0000;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background-image: url(img/5_background/bg-3.jpeg);
+}
+
 @media only screen and (max-width: 920px) and (min-width: 720px) {
     /*.all-info-keys {
         display: flex !important;
@@ -396,7 +410,7 @@ canvas {
     }
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-height: 400px) {
     body {
         transform: rotate(180deg);
         behavior: url(-ms-transform.htc);
@@ -415,6 +429,9 @@ canvas {
     }
     .lower-controls-div-smartphone {
         display: unset;
+    }
+    .responsive-warning {
+        display: none !important;
     }
 }
 
@@ -580,5 +597,11 @@ canvas {
 @media only screen and (max-height: 450px) {
     .btn {
         top: 18rem;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .responsive-warning {
+        display: unset !important;
     }
 }
